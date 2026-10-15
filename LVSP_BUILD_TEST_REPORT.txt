@@ -1,0 +1,52 @@
+LVSP v0.9 Annual Import Plan Operational Core — Build/Test Report
+Date: 2026-08-12
+Version: 0.9.0-annual-import-plan-operational
+
+RESULT: PASS (local/static build and tests)
+
+Package validation:
+- 95 migrations exactly match manifest
+- 12 seed SQL files checked
+- 199 physical tables discovered
+- FK / ALTER / INDEX dependency order checks passed
+- seed target-table checks passed
+- reserved physical table-name guard passed
+- SQL lexical balance checks passed
+- consolidated schema is current
+
+Automated tests: 32/32 PASS
+- Existing API/contract/build 01–08 tests
+- Priority v0.5/v0.7/v0.7.1/v0.8 regression tests
+- v0.9 approved snapshot/history tests
+- v0.9 actual-cleared balance rule tests
+- v0.9 complete Annual Plan API and workflow tests
+- v0.9 dynamic mixed plan-line UI tests
+- v0.9 bulk application → plan-line matching/over-plan warning tests
+- migration manifest coverage through 000740
+
+TypeScript build: PASS
+- shared-types
+- validation
+- web
+- field
+- api
+
+v0.9 implementation highlights:
+- Added non-destructive migration 000780_annual_import_plan_operational.sql
+- Added official application/approval/decision/validity/condition fields
+- Added mixed ITEM / SUMMARY_GROUP plan-line model
+- Added immutable approved plan and item snapshots
+- DRAFT plan-line edits retire superseded rows instead of hard-deleting regulatory records
+- Added balance view using ACTUAL CLEARED quantity only
+- Added transactional create/update whole-plan API
+- Added command-based DRAFT/SUBMITTED/APPROVED/CANCELLED transitions
+- Added dynamic multi-line Annual Plan editor and balance detail dashboard
+- Added deterministic APPROVED-plan application-item → annual-plan-item matching for bulk imports
+- Non-approved plan linkage is flagged for review instead of silently linked
+- Over-plan is WARNING/REVIEW only until final business policy is confirmed
+
+Safety / runtime statement:
+- .env.neon and .env.example hashes are unchanged from the uploaded source archive
+- No destructive database reset was run
+- Migration 000740 was NOT executed against live Neon or Supabase in this patch
+- Live database UAT remains required before production use

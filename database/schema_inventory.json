@@ -1,0 +1,1070 @@
+{
+  "generated_from_migrations": 115,
+  "full_schema_sha256": "a1cea03bb4c283df6e4ff23af71e0af29f036c6c180292eba2045f97567215aa",
+  "tables": [
+    {
+      "name": "system.schema_migration",
+      "migration": "000003_common_functions.sql"
+    },
+    {
+      "name": "system.number_sequence",
+      "migration": "000010_system_numbering.sql"
+    },
+    {
+      "name": "system.legal_instrument",
+      "migration": "000011_system_legal.sql"
+    },
+    {
+      "name": "system.regulatory_rule",
+      "migration": "000011_system_legal.sql"
+    },
+    {
+      "name": "system.service_definition",
+      "migration": "000012_system_services.sql"
+    },
+    {
+      "name": "system.service_version",
+      "migration": "000012_system_services.sql"
+    },
+    {
+      "name": "lookup.country",
+      "migration": "000020_lookup_country.sql"
+    },
+    {
+      "name": "lookup.admin_unit_type",
+      "migration": "000021_lookup_admin_unit_type.sql"
+    },
+    {
+      "name": "lookup.species",
+      "migration": "000022_lookup_species.sql"
+    },
+    {
+      "name": "lookup.facility_type",
+      "migration": "000023_lookup_facility_type.sql"
+    },
+    {
+      "name": "master.admin_unit",
+      "migration": "000030_master_geography.sql"
+    },
+    {
+      "name": "master.party",
+      "migration": "000031_master_party.sql"
+    },
+    {
+      "name": "master.person",
+      "migration": "000032_master_person.sql"
+    },
+    {
+      "name": "master.company",
+      "migration": "000033_master_company.sql"
+    },
+    {
+      "name": "master.party_role_type",
+      "migration": "000034_master_party_roles.sql"
+    },
+    {
+      "name": "master.party_role_assignment",
+      "migration": "000034_master_party_roles.sql"
+    },
+    {
+      "name": "master.organization",
+      "migration": "000035_master_organization.sql"
+    },
+    {
+      "name": "master.facility",
+      "migration": "000036_master_facility.sql"
+    },
+    {
+      "name": "master.facility_type_assignment",
+      "migration": "000036_master_facility.sql"
+    },
+    {
+      "name": "master.facility_party_role",
+      "migration": "000036_master_facility.sql"
+    },
+    {
+      "name": "master.facility_component",
+      "migration": "000037_master_facility_components.sql"
+    },
+    {
+      "name": "security.app_user",
+      "migration": "000040_security_users.sql"
+    },
+    {
+      "name": "security.role",
+      "migration": "000041_security_roles_permissions.sql"
+    },
+    {
+      "name": "security.permission",
+      "migration": "000041_security_roles_permissions.sql"
+    },
+    {
+      "name": "security.role_permission",
+      "migration": "000041_security_roles_permissions.sql"
+    },
+    {
+      "name": "security.access_scope",
+      "migration": "000042_security_scope_delegation.sql"
+    },
+    {
+      "name": "security.user_role_assignment",
+      "migration": "000042_security_scope_delegation.sql"
+    },
+    {
+      "name": "security.delegation",
+      "migration": "000042_security_scope_delegation.sql"
+    },
+    {
+      "name": "workflow.definition",
+      "migration": "000050_workflow_definition.sql"
+    },
+    {
+      "name": "workflow.definition_version",
+      "migration": "000050_workflow_definition.sql"
+    },
+    {
+      "name": "workflow.step",
+      "migration": "000050_workflow_definition.sql"
+    },
+    {
+      "name": "workflow.transition",
+      "migration": "000050_workflow_definition.sql"
+    },
+    {
+      "name": "workflow.instance",
+      "migration": "000051_workflow_runtime.sql"
+    },
+    {
+      "name": "workflow.task",
+      "migration": "000051_workflow_runtime.sql"
+    },
+    {
+      "name": "workflow.action",
+      "migration": "000051_workflow_runtime.sql"
+    },
+    {
+      "name": "document.document",
+      "migration": "000060_document_storage.sql"
+    },
+    {
+      "name": "document.file",
+      "migration": "000060_document_storage.sql"
+    },
+    {
+      "name": "document.template",
+      "migration": "000061_document_templates.sql"
+    },
+    {
+      "name": "document.template_version",
+      "migration": "000061_document_templates.sql"
+    },
+    {
+      "name": "audit.event",
+      "migration": "000070_audit.sql"
+    },
+    {
+      "name": "integration.outbox_event",
+      "migration": "000080_integration_outbox_inbox.sql"
+    },
+    {
+      "name": "integration.inbox_message",
+      "migration": "000080_integration_outbox_inbox.sql"
+    },
+    {
+      "name": "casework.regulatory_case",
+      "migration": "000100_casework.sql"
+    },
+    {
+      "name": "casework.application",
+      "migration": "000100_casework.sql"
+    },
+    {
+      "name": "casework.case_party",
+      "migration": "000100_casework.sql"
+    },
+    {
+      "name": "casework.information_request",
+      "migration": "000100_casework.sql"
+    },
+    {
+      "name": "casework.regulatory_decision",
+      "migration": "000100_casework.sql"
+    },
+    {
+      "name": "registration.registration_type",
+      "migration": "000110_registration.sql"
+    },
+    {
+      "name": "registration.registration",
+      "migration": "000110_registration.sql"
+    },
+    {
+      "name": "registration.product_registration",
+      "migration": "000110_registration.sql"
+    },
+    {
+      "name": "registration.registration_action",
+      "migration": "000110_registration.sql"
+    },
+    {
+      "name": "licensing.license_type",
+      "migration": "000120_licensing.sql"
+    },
+    {
+      "name": "licensing.license",
+      "migration": "000120_licensing.sql"
+    },
+    {
+      "name": "licensing.facility_license",
+      "migration": "000120_licensing.sql"
+    },
+    {
+      "name": "licensing.license_action",
+      "migration": "000120_licensing.sql"
+    },
+    {
+      "name": "document.certificate",
+      "migration": "000130_certificate_foundation.sql"
+    },
+    {
+      "name": "facility.establishment_application",
+      "migration": "000140_facility_establishment.sql"
+    },
+    {
+      "name": "facility.external_approval",
+      "migration": "000140_facility_establishment.sql"
+    },
+    {
+      "name": "facility.factory_profile",
+      "migration": "000141_factory_profile.sql"
+    },
+    {
+      "name": "facility.production_line",
+      "migration": "000142_production_line.sql"
+    },
+    {
+      "name": "facility.gmp_assessment",
+      "migration": "000143_gmp.sql"
+    },
+    {
+      "name": "facility.gmp_scope",
+      "migration": "000143_gmp.sql"
+    },
+    {
+      "name": "product.product_type",
+      "migration": "000150_product_reference.sql"
+    },
+    {
+      "name": "product.ingredient",
+      "migration": "000150_product_reference.sql"
+    },
+    {
+      "name": "lookup.unit_of_measure",
+      "migration": "000150_product_reference.sql"
+    },
+    {
+      "name": "product.product",
+      "migration": "000151_product_master.sql"
+    },
+    {
+      "name": "product.product_version",
+      "migration": "000152_product_versions.sql"
+    },
+    {
+      "name": "product.product_target_species",
+      "migration": "000152_product_versions.sql"
+    },
+    {
+      "name": "product.product_ingredient",
+      "migration": "000153_product_composition.sql"
+    },
+    {
+      "name": "product.package",
+      "migration": "000154_product_packages.sql"
+    },
+    {
+      "name": "product.package_version",
+      "migration": "000154_product_packages.sql"
+    },
+    {
+      "name": "product.label_version",
+      "migration": "000155_product_labels.sql"
+    },
+    {
+      "name": "product.manufacturer_assignment",
+      "migration": "000156_product_manufacturers.sql"
+    },
+    {
+      "name": "registration.product_registration_package",
+      "migration": "000157_product_registration_packages.sql"
+    },
+    {
+      "name": "product.batch",
+      "migration": "000158_product_batch.sql"
+    },
+    {
+      "name": "feed.feed_profile",
+      "migration": "000170_feed_profile_formula.sql"
+    },
+    {
+      "name": "feed.formula",
+      "migration": "000170_feed_profile_formula.sql"
+    },
+    {
+      "name": "feed.formula_version",
+      "migration": "000170_feed_profile_formula.sql"
+    },
+    {
+      "name": "feed.formula_ingredient",
+      "migration": "000170_feed_profile_formula.sql"
+    },
+    {
+      "name": "feed.raw_material_lot",
+      "migration": "000171_feed_raw_material_traceability.sql"
+    },
+    {
+      "name": "feed.batch_material_usage",
+      "migration": "000171_feed_raw_material_traceability.sql"
+    },
+    {
+      "name": "inspection.program",
+      "migration": "000200_inspection_program.sql"
+    },
+    {
+      "name": "inspection.program_version",
+      "migration": "000200_inspection_program.sql"
+    },
+    {
+      "name": "inspection.checklist",
+      "migration": "000201_inspection_checklist.sql"
+    },
+    {
+      "name": "inspection.checklist_version",
+      "migration": "000201_inspection_checklist.sql"
+    },
+    {
+      "name": "inspection.program_checklist",
+      "migration": "000201_inspection_checklist.sql"
+    },
+    {
+      "name": "inspection.checklist_item",
+      "migration": "000201_inspection_checklist.sql"
+    },
+    {
+      "name": "inspection.inspection_case",
+      "migration": "000202_inspection_runtime.sql"
+    },
+    {
+      "name": "inspection.visit",
+      "migration": "000202_inspection_runtime.sql"
+    },
+    {
+      "name": "inspection.assignment",
+      "migration": "000202_inspection_runtime.sql"
+    },
+    {
+      "name": "inspection.response",
+      "migration": "000202_inspection_runtime.sql"
+    },
+    {
+      "name": "inspection.evidence",
+      "migration": "000203_inspection_evidence_findings.sql"
+    },
+    {
+      "name": "inspection.finding",
+      "migration": "000203_inspection_evidence_findings.sql"
+    },
+    {
+      "name": "inspection.finding_evidence",
+      "migration": "000203_inspection_evidence_findings.sql"
+    },
+    {
+      "name": "compliance.violation",
+      "migration": "000220_compliance.sql"
+    },
+    {
+      "name": "compliance.capa",
+      "migration": "000220_compliance.sql"
+    },
+    {
+      "name": "compliance.capa_action",
+      "migration": "000220_compliance.sql"
+    },
+    {
+      "name": "compliance.verification",
+      "migration": "000220_compliance.sql"
+    },
+    {
+      "name": "enforcement.enforcement_case",
+      "migration": "000230_enforcement.sql"
+    },
+    {
+      "name": "enforcement.enforcement_case_violation",
+      "migration": "000230_enforcement.sql"
+    },
+    {
+      "name": "enforcement.action",
+      "migration": "000230_enforcement.sql"
+    },
+    {
+      "name": "enforcement.appeal",
+      "migration": "000230_enforcement.sql"
+    },
+    {
+      "name": "laboratory.laboratory",
+      "migration": "000240_laboratory_profile.sql"
+    },
+    {
+      "name": "laboratory.sample",
+      "migration": "000241_laboratory_sample_custody.sql"
+    },
+    {
+      "name": "laboratory.sample_custody_event",
+      "migration": "000241_laboratory_sample_custody.sql"
+    },
+    {
+      "name": "laboratory.test_method",
+      "migration": "000243_laboratory_test_method.sql"
+    },
+    {
+      "name": "laboratory.test_request",
+      "migration": "000244_laboratory_work_order.sql"
+    },
+    {
+      "name": "laboratory.work_order",
+      "migration": "000244_laboratory_work_order.sql"
+    },
+    {
+      "name": "laboratory.result",
+      "migration": "000246_laboratory_result.sql"
+    },
+    {
+      "name": "laboratory.result_version",
+      "migration": "000246_laboratory_result.sql"
+    },
+    {
+      "name": "laboratory.equipment",
+      "migration": "000248_laboratory_equipment_quality.sql"
+    },
+    {
+      "name": "laboratory.calibration",
+      "migration": "000248_laboratory_equipment_quality.sql"
+    },
+    {
+      "name": "laboratory.quality_event",
+      "migration": "000248_laboratory_equipment_quality.sql"
+    },
+    {
+      "name": "lookup.breed",
+      "migration": "000300_species_breed.sql"
+    },
+    {
+      "name": "farm.farm",
+      "migration": "000310_farm.sql"
+    },
+    {
+      "name": "farm.species_assignment",
+      "migration": "000310_farm.sql"
+    },
+    {
+      "name": "farm.population_snapshot",
+      "migration": "000310_farm.sql"
+    },
+    {
+      "name": "farm.biosecurity_assessment",
+      "migration": "000310_farm.sql"
+    },
+    {
+      "name": "farm.production_cycle",
+      "migration": "000310_farm.sql"
+    },
+    {
+      "name": "animal.animal",
+      "migration": "000320_animal_identity.sql"
+    },
+    {
+      "name": "animal.identifier",
+      "migration": "000320_animal_identity.sql"
+    },
+    {
+      "name": "animal.animal_group",
+      "migration": "000320_animal_identity.sql"
+    },
+    {
+      "name": "animal.ownership_history",
+      "migration": "000323_animal_history.sql"
+    },
+    {
+      "name": "animal.location_history",
+      "migration": "000323_animal_history.sql"
+    },
+    {
+      "name": "animal.movement",
+      "migration": "000330_movement.sql"
+    },
+    {
+      "name": "animal.movement_subject",
+      "migration": "000330_movement.sql"
+    },
+    {
+      "name": "animal.movement_transport",
+      "migration": "000330_movement.sql"
+    },
+    {
+      "name": "animal.movement_checkpoint",
+      "migration": "000330_movement.sql"
+    },
+    {
+      "name": "animal.lifecycle_event",
+      "migration": "000340_animal_lifecycle_event.sql"
+    },
+    {
+      "name": "disease.disease",
+      "migration": "000400_disease_catalog.sql"
+    },
+    {
+      "name": "disease.surveillance_program",
+      "migration": "000401_surveillance.sql"
+    },
+    {
+      "name": "disease.surveillance_program_version",
+      "migration": "000401_surveillance.sql"
+    },
+    {
+      "name": "disease.surveillance_event",
+      "migration": "000401_surveillance.sql"
+    },
+    {
+      "name": "disease.disease_case",
+      "migration": "000410_disease_case_investigation.sql"
+    },
+    {
+      "name": "disease.disease_case_subject",
+      "migration": "000410_disease_case_investigation.sql"
+    },
+    {
+      "name": "disease.investigation",
+      "migration": "000410_disease_case_investigation.sql"
+    },
+    {
+      "name": "disease.epidemiological_link",
+      "migration": "000410_disease_case_investigation.sql"
+    },
+    {
+      "name": "disease.outbreak",
+      "migration": "000420_outbreak_zone_control.sql"
+    },
+    {
+      "name": "disease.outbreak_case",
+      "migration": "000420_outbreak_zone_control.sql"
+    },
+    {
+      "name": "disease.zone",
+      "migration": "000420_outbreak_zone_control.sql"
+    },
+    {
+      "name": "disease.control_measure",
+      "migration": "000420_outbreak_zone_control.sql"
+    },
+    {
+      "name": "disease.movement_restriction",
+      "migration": "000420_outbreak_zone_control.sql"
+    },
+    {
+      "name": "disease.vaccination_campaign",
+      "migration": "000430_vaccination.sql"
+    },
+    {
+      "name": "disease.vaccination_event",
+      "migration": "000430_vaccination.sql"
+    },
+    {
+      "name": "disease.emergency_incident",
+      "migration": "000440_emergency.sql"
+    },
+    {
+      "name": "disease.emergency_team_assignment",
+      "migration": "000440_emergency.sql"
+    },
+    {
+      "name": "disease.emergency_activity",
+      "migration": "000440_emergency.sql"
+    },
+    {
+      "name": "disease.amr_isolate",
+      "migration": "000450_amr.sql"
+    },
+    {
+      "name": "disease.amr_susceptibility",
+      "migration": "000450_amr.sql"
+    },
+    {
+      "name": "trade.operator",
+      "migration": "000500_trade_operator_permit.sql"
+    },
+    {
+      "name": "trade.permit_type",
+      "migration": "000500_trade_operator_permit.sql"
+    },
+    {
+      "name": "trade.permit",
+      "migration": "000500_trade_operator_permit.sql"
+    },
+    {
+      "name": "trade.shipment",
+      "migration": "000510_shipment.sql"
+    },
+    {
+      "name": "trade.shipment_item",
+      "migration": "000510_shipment.sql"
+    },
+    {
+      "name": "trade.shipment_transport",
+      "migration": "000510_shipment.sql"
+    },
+    {
+      "name": "trade.border_declaration",
+      "migration": "000513_border_declaration.sql"
+    },
+    {
+      "name": "trade.risk_assessment",
+      "migration": "000520_trade_risk.sql"
+    },
+    {
+      "name": "trade.border_inspection",
+      "migration": "000521_border_inspection.sql"
+    },
+    {
+      "name": "trade.quarantine_case",
+      "migration": "000522_quarantine_clearance.sql"
+    },
+    {
+      "name": "trade.clearance_decision",
+      "migration": "000522_quarantine_clearance.sql"
+    },
+    {
+      "name": "trade.health_certificate",
+      "migration": "000530_trade_health_certificate.sql"
+    },
+    {
+      "name": "trade.ecertificate_message",
+      "migration": "000531_ecertificate.sql"
+    },
+    {
+      "name": "fisheries.aquaculture_facility",
+      "migration": "000550_aquaculture.sql"
+    },
+    {
+      "name": "fisheries.aquaculture_unit",
+      "migration": "000550_aquaculture.sql"
+    },
+    {
+      "name": "fisheries.stock_batch",
+      "migration": "000552_aquatic_stock_production.sql"
+    },
+    {
+      "name": "fisheries.production_record",
+      "migration": "000552_aquatic_stock_production.sql"
+    },
+    {
+      "name": "fisheries.harvest",
+      "migration": "000552_aquatic_stock_production.sql"
+    },
+    {
+      "name": "integration.system",
+      "migration": "000600_integration_registry.sql"
+    },
+    {
+      "name": "integration.endpoint",
+      "migration": "000600_integration_registry.sql"
+    },
+    {
+      "name": "integration.mapping",
+      "migration": "000600_integration_registry.sql"
+    },
+    {
+      "name": "notification.template",
+      "migration": "000610_notifications.sql"
+    },
+    {
+      "name": "notification.message",
+      "migration": "000610_notifications.sql"
+    },
+    {
+      "name": "notification.delivery",
+      "migration": "000610_notifications.sql"
+    },
+    {
+      "name": "gis.layer",
+      "migration": "000620_gis_layer_registry.sql"
+    },
+    {
+      "name": "gis.layer_version",
+      "migration": "000620_gis_layer_registry.sql"
+    },
+    {
+      "name": "analytics.kpi_definition",
+      "migration": "000630_analytics_kpi.sql"
+    },
+    {
+      "name": "analytics.metric_snapshot",
+      "migration": "000630_analytics_kpi.sql"
+    },
+    {
+      "name": "analytics.dashboard_definition",
+      "migration": "000630_analytics_kpi.sql"
+    },
+    {
+      "name": "system.scheduled_job",
+      "migration": "000640_scheduler.sql"
+    },
+    {
+      "name": "system.scheduled_job_execution",
+      "migration": "000640_scheduler.sql"
+    },
+    {
+      "name": "system.data_quality_issue",
+      "migration": "000650_data_quality.sql"
+    },
+    {
+      "name": "system.data_merge_request",
+      "migration": "000650_data_quality.sql"
+    },
+    {
+      "name": "system.retention_policy",
+      "migration": "000660_retention_archive.sql"
+    },
+    {
+      "name": "system.archive_record",
+      "migration": "000660_retention_archive.sql"
+    },
+    {
+      "name": "product.product_regulatory_profile",
+      "migration": "000700_priority_veterinary_products_trade.sql"
+    },
+    {
+      "name": "product.veterinary_device",
+      "migration": "000700_priority_veterinary_products_trade.sql"
+    },
+    {
+      "name": "trade.import_plan",
+      "migration": "000700_priority_veterinary_products_trade.sql"
+    },
+    {
+      "name": "trade.import_plan_item",
+      "migration": "000700_priority_veterinary_products_trade.sql"
+    },
+    {
+      "name": "trade.import_application",
+      "migration": "000700_priority_veterinary_products_trade.sql"
+    },
+    {
+      "name": "trade.import_application_item",
+      "migration": "000700_priority_veterinary_products_trade.sql"
+    },
+    {
+      "name": "product.package_composition",
+      "migration": "000710_priority_veterinary_products_complete.sql"
+    },
+    {
+      "name": "analytics.amr_substance_reference",
+      "migration": "000720_legacy_trade_print_animuse.sql"
+    },
+    {
+      "name": "lookup.company_site_role",
+      "migration": "000730_company_master_multisite.sql"
+    },
+    {
+      "name": "master.company_alias",
+      "migration": "000730_company_master_multisite.sql"
+    },
+    {
+      "name": "master.company_site",
+      "migration": "000730_company_master_multisite.sql"
+    },
+    {
+      "name": "master.facility_contact",
+      "migration": "000730_company_master_multisite.sql"
+    },
+    {
+      "name": "master.company_external_registration",
+      "migration": "000730_company_master_multisite.sql"
+    },
+    {
+      "name": "system.service_guide",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "system.service_step",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "system.service_requirement",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "system.service_output",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "casework.service_draft",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "casework.service_draft_step",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "casework.service_draft_requirement",
+      "migration": "000740_guided_services_workflow.sql"
+    },
+    {
+      "name": "system.platform_setting",
+      "migration": "000750_pwa_admin_field_foundation.sql"
+    },
+    {
+      "name": "inspection.field_capture_draft",
+      "migration": "000750_pwa_admin_field_foundation.sql"
+    },
+    {
+      "name": "reporting.region",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.province_profile",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.region_staff_assignment",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.report_submission",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.indicator_definition",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.indicator_value",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.trade_stat",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.activity_note",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "reporting.monthly_report_draft",
+      "migration": "000760_provincial_reporting_consolidation.sql"
+    },
+    {
+      "name": "lookup.veterinary_drug_reference_term",
+      "migration": "000770_vet_drug_reference_automation.sql"
+    },
+    {
+      "name": "product.veterinary_registration_number_sequence",
+      "migration": "000770_vet_drug_reference_automation.sql"
+    },
+    {
+      "name": "trade.import_plan_version",
+      "migration": "000780_annual_import_plan_operational.sql"
+    },
+    {
+      "name": "trade.import_plan_item_version",
+      "migration": "000780_annual_import_plan_operational.sql"
+    },
+    {
+      "name": "trade.import_plan_profile",
+      "migration": "000790_flexible_annual_import_plan.sql"
+    },
+    {
+      "name": "trade.import_plan_item_profile",
+      "migration": "000790_flexible_annual_import_plan.sql"
+    },
+    {
+      "name": "trade.import_plan_allocation",
+      "migration": "000790_flexible_annual_import_plan.sql"
+    },
+    {
+      "name": "trade.import_plan_mapping_rule",
+      "migration": "000790_flexible_annual_import_plan.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_application",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_application_party",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_application_presentation",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_application_document",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_review",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_transition_rule",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_application_action",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_application_registration",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_presentation_registration",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_presentation_certificate",
+      "migration": "000800_vet_drug_registration_operational.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_internal_memo",
+      "migration": "000810_legacy_registration_trade_parity.sql"
+    },
+    {
+      "name": "registration.veterinary_drug_internal_memo_item",
+      "migration": "000810_legacy_registration_trade_parity.sql"
+    },
+    {
+      "name": "lookup.regulatory_coordination_requirement",
+      "migration": "000810_legacy_registration_trade_parity.sql"
+    },
+    {
+      "name": "trade.application_coordination_sheet",
+      "migration": "000810_legacy_registration_trade_parity.sql"
+    },
+    {
+      "name": "trade.application_coordination_item",
+      "migration": "000810_legacy_registration_trade_parity.sql"
+    },
+    {
+      "name": "system.module_catalog",
+      "migration": "000830_national_access_foundation.sql"
+    },
+    {
+      "name": "licensing.license_authority_rule",
+      "migration": "000830_national_access_foundation.sql"
+    },
+    {
+      "name": "certification.ecert_document",
+      "migration": "000850_national_ecert_verification_foundation.sql"
+    },
+    {
+      "name": "certification.ecert_status_history",
+      "migration": "000850_national_ecert_verification_foundation.sql"
+    },
+    {
+      "name": "certification.ecert_acknowledgement",
+      "migration": "000850_national_ecert_verification_foundation.sql"
+    },
+    {
+      "name": "certification.ecert_exchange_message",
+      "migration": "000850_national_ecert_verification_foundation.sql"
+    },
+    {
+      "name": "certification.ecert_verification_event",
+      "migration": "000850_national_ecert_verification_foundation.sql"
+    },
+    {
+      "name": "certification.ecert_module_policy",
+      "migration": "000850_national_ecert_verification_foundation.sql"
+    },
+    {
+      "name": "trade.annual_plan_service_type",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "certification.ecert_legacy_certificate_link",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "certification.ecert_profile",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "certification.ecert_profile_attestation",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "governance.organizational_unit",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "governance.service_catalog",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "governance.service_scope_history",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "integration.external_system",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "integration.external_identifier",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "integration.message_envelope",
+      "migration": "000860_annual_trade_plan_ecert_bridge.sql"
+    },
+    {
+      "name": "product.botanical_ingredient",
+      "migration": "000870_batch_ops_botanical_hs_codes.sql"
+    },
+    {
+      "name": "product.batch_operation",
+      "migration": "000870_batch_ops_botanical_hs_codes.sql"
+    },
+    {
+      "name": "product.batch_operation_link",
+      "migration": "000870_batch_ops_botanical_hs_codes.sql"
+    },
+    {
+      "name": "trade.export_application_detail",
+      "migration": "000880_export_pathway_foundation.sql"
+    },
+    {
+      "name": "trade.export_application_item",
+      "migration": "000880_export_pathway_foundation.sql"
+    },
+    {
+      "name": "product.product_common_composition",
+      "migration": "000910_vetdrug_combined_herbal_amr.sql"
+    },
+    {
+      "name": "reporting.department_work_item",
+      "migration": "000930_department_operations.sql"
+    },
+    {
+      "name": "reporting.department_budget_entry",
+      "migration": "000930_department_operations.sql"
+    },
+    {
+      "name": "registration.document_intake_draft",
+      "migration": "000940_document_intake_pilot.sql"
+    },
+    {
+      "name": "document.intake_attachment",
+      "migration": "000940_document_intake_pilot.sql"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+--- Phase2/apps/api/src/core/postgres-store.ts
+
++++ Current/apps/api/src/core/postgres-store.ts
+
+@@ -26,5 +26,6 @@
+
+  outbreak_zones:{table:'disease.zone'}, outbreak_control_measures:{table:'disease.control_measure'}, enforcement_actions:{table:'enforcement.action'}, enforcement_appeals:{table:'enforcement.appeal'},
+  aquaculture_production:{table:'fisheries.production_record'}, aquaculture_harvest:{table:'fisheries.harvest'},
+- provincial_reports:{table:'reporting.report_submission'}
++ provincial_reports:{table:'reporting.report_submission'},
++ export_application_details:{table:'trade.export_application_detail'}, export_application_items:{table:'trade.export_application_item'}
+ };
+ 
+@@ -274,4 +275,6 @@
+
+   }
+   async countries(){const r=await this.pool.query('select id,iso2_code,iso3_code,name_lo,name_en from lookup.country where is_active=true order by name_en nulls last,name_lo');return r.rows.map((x:any)=>normalized(x,'id'));}
++  async species(){const r=await this.pool.query('select id,code,name_lo,name_en from lookup.species where is_active=true order by name_lo');return r.rows.map((x:any)=>normalized(x,'id'));}
++  async unitsOfMeasure(){const r=await this.pool.query('select id,code,name_lo,name_en from lookup.unit_of_measure where is_active=true order by name_en nulls last,name_lo');return r.rows.map((x:any)=>normalized(x,'id'));}
+   async companyComplete(id:string){
+     const c=await this.pool.query(`select c.*,p.display_name from master.company c join master.party p on p.id=c.party_id where c.party_id=$1`,[id]);
+@@ -420,5 +423,5 @@
+
+       const stepCode=String(input.stepCode||d.current_step_code||'');const step=(await client.query('select * from casework.service_draft_step where draft_id=$1 and step_code=$2',[id,stepCode])).rows[0];if(!step)throw Object.assign(new Error('Unknown service step'),{statusCode:400,code:'INVALID_SERVICE_STEP'});
+       const payload=input.payload&&typeof input.payload==='object'?input.payload:{};const completed=input.completed!==false;
+-      await client.query(`update casework.service_draft_step set status=$1,step_payload=step_payload||$2::jsonb,completed_at=case when $1='COMPLETED' then coalesce(completed_at,now()) else null end,updated_at=now() where id=$3`,[completed?'COMPLETED':'IN_PROGRESS',JSON.stringify(payload),step.id]);
++      await client.query(`update casework.service_draft_step set status=$1::text,step_payload=step_payload||$2::jsonb,completed_at=case when $1::text='COMPLETED' then coalesce(completed_at,now()) else null end,updated_at=now() where id=$3`,[completed?'COMPLETED':'IN_PROGRESS',JSON.stringify(payload),step.id]);
+       if(input.requirements&&typeof input.requirements==='object')for(const [code,status] of Object.entries(input.requirements)){await client.query(`update casework.service_draft_requirement dr set status=$1,checked_at=now(),updated_at=now() from system.service_requirement sr where dr.requirement_id=sr.id and dr.draft_id=$2 and sr.requirement_code=$3`,[String(status),id,code]);}
+       const next=(await client.query("select step_code from casework.service_draft_step where draft_id=$1 and status<>'COMPLETED' order by sequence_no limit 1",[id])).rows[0];
+@@ -430,4 +433,84 @@
+
+     const d=await this.pool.query('select * from casework.service_draft where id=$1',[id]);if(!d.rows[0])throw Object.assign(new Error('Service draft not found'),{statusCode:404,code:'SERVICE_DRAFT_NOT_FOUND'});if(!isAdmin&&String(d.rows[0].started_by_subject)!==String(startedBy))throw Object.assign(new Error('Not allowed'),{statusCode:403,code:'FORBIDDEN'});
+     const r=await this.pool.query(`update casework.service_draft set target_resource=$1,target_id=$2,status='DOMAIN_DRAFT_CREATED',completed_at=coalesce(completed_at,now()),last_saved_at=now() where id=$3 returning *`,[targetResource,targetId,id]);return normalized(r.rows[0],'id');
++  }
++  async allocateExportCaseNo(){
++    const client=await this.pool.connect();
++    try{
++      await client.query('begin');
++      const year=new Date().getUTCFullYear();
++      await client.query(`insert into system.number_sequence(sequence_code,organization_id,year_value,prefix,next_value,padding_length,reset_rule,is_active) values('EXPORT_CASE',null,$1,'EXP',1,6,'YEARLY',true) on conflict (sequence_code,coalesce(organization_id,'00000000-0000-0000-0000-000000000000'::uuid),coalesce(year_value,-1)) do nothing`,[year]);
++      const row=(await client.query(`select id,next_value,padding_length,prefix from system.number_sequence where sequence_code='EXPORT_CASE' and organization_id is null and year_value=$1 for update`,[year])).rows[0];
++      const next=Number(row.next_value);
++      await client.query('update system.number_sequence set next_value=next_value+1 where id=$1',[row.id]);
++      await client.query('commit');
++      return `${row.prefix}-${year}-${String(next).padStart(Number(row.padding_length)||6,'0')}`;
++    }catch(e){try{await client.query('rollback')}catch{}throw e}finally{client.release()}
++  }
++  async createExportApplication(input:any,startedBy:string){
++    const companyId=input?.companyId;
++    if(!companyId)throw Object.assign(new Error('Company is required'),{statusCode:400,code:'COMPANY_REQUIRED'});
++    const c=await this.pool.query('select 1 from master.company where party_id=$1',[companyId]);
++    if(!c.rows[0])throw Object.assign(new Error('Company not found'),{statusCode:400,code:'COMPANY_NOT_FOUND'});
++    const serviceType=String(input?.serviceType||'').toUpperCase();
++    const st=await this.pool.query('select allowed_movements from trade.annual_plan_service_type where service_type=$1',[serviceType]);
++    if(!st.rows[0])throw Object.assign(new Error('Unknown service type'),{statusCode:400,code:'INVALID_SERVICE_TYPE'});
++    const allowedMovements=Array.isArray(st.rows[0].allowed_movements)?st.rows[0].allowed_movements:[];
++    if(!allowedMovements.includes('EXPORT'))throw Object.assign(new Error('EXPORT is not configured for this work area'),{statusCode:400,code:'MOVEMENT_NOT_ALLOWED'});
++    const destinationCountryId=input?.destinationCountryId||null;
++    if(destinationCountryId){const co=await this.pool.query('select 1 from lookup.country where id=$1',[destinationCountryId]);if(!co.rows[0])throw Object.assign(new Error('Unknown destination country'),{statusCode:400,code:'INVALID_COUNTRY'});}
++    const items=Array.isArray(input?.items)?input.items:[];
++    if(!items.length)throw Object.assign(new Error('At least one item is required'),{statusCode:400,code:'ITEMS_REQUIRED'});
++    const guide=await this.guidedServiceGuide('TR-2001');
++    if(!guide)throw Object.assign(new Error('Export service is not configured'),{statusCode:500,code:'SERVICE_NOT_CONFIGURED'});
++    const serviceVersionId=guide.service.serviceVersionId;
++    const caseNo=await this.allocateExportCaseNo();
++    const client=await this.pool.connect();
++    try{
++      await client.query('begin');
++      const caseRow=(await client.query(`insert into casework.regulatory_case(case_no,service_version_id,applicant_party_id,status,source_channel,submitted_at,created_by) values($1,$2,$3,'SUBMITTED','ONLINE',now(),$4) returning id`,[caseNo,serviceVersionId,companyId,isUuid(startedBy)?startedBy:null])).rows[0];
++      const appRow=(await client.query(`insert into casework.application(case_id,application_type,declaration_accepted,declaration_at,submitted_payload) values($1,'EXPORT',true,now(),$2::jsonb) returning id`,[caseRow.id,JSON.stringify(input||{})])).rows[0];
++      await client.query(`insert into trade.export_application_detail(application_id,service_type,destination_country_id,intended_shipment_from,intended_shipment_to,notes) values($1,$2,$3,$4,$5,$6)`,[appRow.id,serviceType,destinationCountryId,input?.shipmentFrom||null,input?.shipmentTo||null,input?.notes||null]);
++      for(let i=0;i<items.length;i++){
++        const it=items[i]||{};
++        const quantity=it.quantity===undefined||it.quantity===null||it.quantity===''?null:Number(it.quantity);
++        if(quantity!==null&&(!Number.isFinite(quantity)||quantity<0))throw Object.assign(new Error('Item quantity must be a non-negative number'),{statusCode:400,code:'INVALID_ITEM_QUANTITY'});
++        await client.query(`insert into trade.export_application_item(application_id,item_no,commodity_class,species_id,product_id,item_description,hs_ahtn_code,quantity,unit_id,notes) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
++          [appRow.id,i+1,it.commodityClass||null,it.speciesId||null,it.productId||null,it.itemDescription||it.itemName||null,it.hsAhtnCode||null,quantity,it.unitId||null,it.notes||null]);
++      }
++      await client.query('commit');
++      return this.exportApplicationComplete(appRow.id);
++    }catch(e){try{await client.query('rollback')}catch{}throw e}finally{client.release()}
++  }
++  async exportApplicationComplete(id:string){
++    const a=await this.pool.query(`select app.*,rc.case_no,rc.status case_status,rc.submitted_at,rc.applicant_party_id,
++      c.legal_name_lo,c.legal_name_en,
++      d.service_type,d.destination_country_id,d.intended_shipment_from,d.intended_shipment_to,d.notes detail_notes,
++      co.name_lo destination_country_name_lo,co.name_en destination_country_name_en
++      from casework.application app
++      join casework.regulatory_case rc on rc.id=app.case_id
++      left join master.company c on c.party_id=rc.applicant_party_id
++      left join trade.export_application_detail d on d.application_id=app.id
++      left join lookup.country co on co.id=d.destination_country_id
++      where app.id=$1`,[id]);
++    if(!a.rows[0])return undefined;
++    const items=await this.pool.query(`select it.*,sp.name_lo species_name_lo,sp.name_en species_name_en,u.name_lo unit_name_lo,u.name_en unit_name_en,u.code unit_code
++      from trade.export_application_item it
++      left join lookup.species sp on sp.id=it.species_id
++      left join lookup.unit_of_measure u on u.id=it.unit_id
++      where it.application_id=$1 order by it.item_no`,[id]);
++    return {application:normalized(a.rows[0],'id'),items:items.rows.map((x:any)=>normalized(x,'id'))};
++  }
++  async exportApplications(){
++    const r=await this.pool.query(`select app.id,rc.case_no,rc.status,rc.submitted_at,d.service_type,
++      coalesce(co.name_lo,co.name_en) destination_country,
++      c.legal_name_lo,c.legal_name_en
++      from casework.application app
++      join casework.regulatory_case rc on rc.id=app.case_id
++      left join trade.export_application_detail d on d.application_id=app.id
++      left join lookup.country co on co.id=d.destination_country_id
++      left join master.company c on c.party_id=rc.applicant_party_id
++      where app.application_type='EXPORT'
++      order by rc.submitted_at desc nulls last,app.created_at desc limit 500`);
++    return r.rows.map((x:any)=>normalized(x,'id'));
+   }
+   async myWorkQueue(userId:string,isAdmin=false){

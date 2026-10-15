@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="lo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LVSP — e-Cert Verification</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17352d;background:#f3f7f5}
+*{box-sizing:border-box}body{margin:0}.top{background:#083b2f;color:#fff;padding:18px 24px}.wrap{max-width:980px;margin:38px auto;padding:0 18px}.card{background:#fff;border:1px solid #dfe9e5;border-radius:22px;padding:28px;box-shadow:0 16px 45px rgba(15,55,44,.08)}.badge{display:inline-block;border:1px solid #f0b97a;background:#fff6ea;color:#9b5315;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;letter-spacing:.04em}h1{font-size:30px;margin:14px 0 8px}.search{display:flex;gap:10px;margin:22px 0}.search input{flex:1;border:1px solid #bfcfc9;border-radius:12px;padding:13px 14px;font-size:16px}.search button{border:0;border-radius:12px;background:#0f6b50;color:#fff;padding:0 20px;font-weight:800}.note{font-size:13px;color:#64746f}.result,.empty{border:1px solid #dfe9e5;border-radius:14px;padding:16px;margin:12px 0}.kind{font-size:12px;font-weight:800;color:#0f6b50;text-transform:uppercase}.title{font-size:19px;font-weight:800;margin:4px 0}.meta{line-height:1.55;color:#435a52}.status{display:inline-block;padding:3px 8px;border-radius:999px;background:#eaf5f0;font-weight:800}.arch{margin-top:22px;background:#edf7f3;border-radius:14px;padding:14px;line-height:1.5}a{color:#0f6b50;font-weight:700}
+</style>
+</head>
+<body>
+<div class="top"><div style="max-width:980px;margin:auto"><b>LVSP</b> · Lao Veterinary Services Platform</div></div>
+<div class="wrap"><div class="card">
+<span class="badge">PUBLIC VERIFICATION PILOT</span>
+<h1>ກວດສອບເອກະສານ / e-Cert & Document Verification</h1>
+<div>ຄົ້ນຫາດ້ວຍ Certificate No. ຫຼື verification code. ຖ້າບໍ່ພົບ e-Cert, LVSP ຈະກວດຄົ້ນ public legacy record ຕໍ່.</div>
+<form class="search" id="f"><input id="q" autocomplete="off" placeholder="Certificate / Registration / Permit / Document no."><button>ກວດສອບ / Verify</button></form>
+<p class="note">Public-safe only. Internal dossier, passport/contact data, private attachments and confidential structured payload are not shown.</p>
+<div id="r" class="results"></div>
+<div class="arch"><b>LVSP e-Cert transition:</b> National e-Cert verification is checked first through the 000850 registry. Existing safe public search remains as a transition fallback.</div>
+<p><a href="/">← LVSP Home</a></p>
+</div></div>
+<script>
+const f=document.getElementById('f'),q=document.getElementById('q'),r=document.getElementById('r');
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const val=(o,...k)=>{for(const x of k)if(o&&o[x]!=null&&String(o[x]).trim())return o[x];return''};
+const arrayOf=b=>Array.isArray(b)?b:Array.isArray(b?.data)?b.data:Array.isArray(b?.results)?b.results:[];
+function render(a){
+ if(!a.length){r.innerHTML='<div class="empty">ບໍ່ພົບຂໍ້ມູນ public / No public match found.</div>';return}
+ r.innerHTML=a.map(x=>{
+  const kind=val(x,'documentTypeCode','sourceModuleCode','kind','type','recordType','moduleCode','source')||'LVSP RECORD';
+  const title=val(x,'subjectSummary','title','name','tradeName','itemName','documentName','certificateNo','registrationNo','permitNo')||'LVSP public record';
+  const no=val(x,'certificateNo','registrationNo','permitNo','decisionNo','applicationNo','documentNo','referenceNo');
+  const st=val(x,'verificationStatus','lifecycleStatus','status','permitStatus','currentStatus');
+  const d=val(x,'issuerPublicName','subtitle','genericName','inn','manufacturerName','companyName','description');
+  const route=[val(x,'originCountryCode'),val(x,'destinationCountryCode')].filter(Boolean).join(' → ');
+  return `<div class="result"><div class="kind">${esc(kind)}</div><div class="title">${esc(title)}</div><div class="meta">${no?`<b>No:</b> ${esc(no)}<br>`:''}${st?`<b>Status:</b> <span class="status">${esc(st)}</span><br>`:''}${route?`<b>Route:</b> ${esc(route)}<br>`:''}${esc(d)}</div></div>`
+ }).join('')
+}
+async function lookup(url){const z=await fetch(url,{headers:{accept:'application/json'}});if(!z.ok)throw new Error('lookup failed');return arrayOf(await z.json().catch(()=>({})))}
+f.addEventListener('submit',async e=>{
+ e.preventDefault();const s=q.value.trim();if(!s)return;r.innerHTML='<div class="empty">Searching…</div>';
+ try{
+   let a=[];try{a=await lookup('/api/v1/public/ecert/verify?q='+encodeURIComponent(s))}catch{}
+   if(!a.length)a=await lookup('/api/v1/public/search?q='+encodeURIComponent(s));
+   render(a)
+ }catch{r.innerHTML='<div class="empty">Unable to reach LVSP public verification.</div>'}
+});
+const u=new URLSearchParams(location.search).get('q');if(u){q.value=u;f.requestSubmit()}
+</script>
+</body></html>

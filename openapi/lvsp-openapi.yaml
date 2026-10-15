@@ -1,0 +1,2548 @@
+openapi: 3.1.0
+info:
+  title: Lao Veterinary Services Platform API
+  version: 1.2.0-vet-drug-reference-automation
+  description: LVSP developer baseline. Regulatory values, workflow details and legal
+    conditions remain versioned/configuration-driven; this contract intentionally
+    avoids inventing unverified legal rules.
+servers:
+- url: /api/v1
+security:
+- oidc: []
+tags:
+- name: Platform
+- name: Users
+- name: Organizations
+- name: Geography
+- name: Master Data
+- name: Workflow
+- name: Documents
+- name: Regulatory Case
+- name: Registration
+- name: Licensing
+- name: Certificates
+- name: Facilities
+- name: Products
+- name: Feed
+- name: Farms
+- name: Animals
+- name: Movement
+- name: Animal Health
+- name: Inspection
+- name: Compliance
+- name: Enforcement
+- name: Laboratory
+- name: Trade
+- name: Fisheries
+- name: GIS
+- name: Analytics
+- name: Integration
+- name: Guided Services
+- name: Reporting
+paths:
+  /users:
+    get:
+      tags:
+      - Users
+      operationId: listUsers
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Users
+      operationId: createUser
+      responses:
+        '201':
+          description: Created
+  /users/{id}:
+    get:
+      tags:
+      - Users
+      operationId: getUser
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /organizations:
+    get:
+      tags:
+      - Organizations
+      operationId: listOrganizations
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Organizations
+      operationId: createOrganization
+      responses:
+        '201':
+          description: Created
+  /organizations/{id}:
+    get:
+      tags:
+      - Organizations
+      operationId: getOrganization
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /admin-units:
+    get:
+      tags:
+      - Geography
+      operationId: listAdminUnits
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Geography
+      operationId: createAdminUnit
+      responses:
+        '201':
+          description: Created
+  /admin-units/{id}:
+    get:
+      tags:
+      - Geography
+      operationId: getAdminUnit
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /persons:
+    get:
+      tags:
+      - Master Data
+      operationId: listPersons
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Master Data
+      operationId: createPerson
+      responses:
+        '201':
+          description: Created
+  /persons/{id}:
+    get:
+      tags:
+      - Master Data
+      operationId: getPerson
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /companies:
+    get:
+      tags:
+      - Master Data
+      operationId: listCompanies
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Master Data
+      operationId: createCompanie
+      responses:
+        '201':
+          description: Created
+  /companies/{id}:
+    get:
+      tags:
+      - Master Data
+      operationId: getCompanie
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /facilities:
+    get:
+      tags:
+      - Facilities
+      operationId: listFacilities
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Facilities
+      operationId: createFacilitie
+      responses:
+        '201':
+          description: Created
+  /facilities/{id}:
+    get:
+      tags:
+      - Facilities
+      operationId: getFacilitie
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /services:
+    get:
+      tags:
+      - Platform
+      operationId: listServices
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Platform
+      operationId: createService
+      responses:
+        '201':
+          description: Created
+  /services/{id}:
+    get:
+      tags:
+      - Platform
+      operationId: getService
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /workflows:
+    get:
+      tags:
+      - Workflow
+      operationId: listWorkflows
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Workflow
+      operationId: createWorkflow
+      responses:
+        '201':
+          description: Created
+  /workflows/{id}:
+    get:
+      tags:
+      - Workflow
+      operationId: getWorkflow
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /tasks:
+    get:
+      tags:
+      - Workflow
+      operationId: listTasks
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Workflow
+      operationId: createTask
+      responses:
+        '201':
+          description: Created
+  /tasks/{id}:
+    get:
+      tags:
+      - Workflow
+      operationId: getTask
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /documents:
+    get:
+      tags:
+      - Documents
+      operationId: listDocuments
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Documents
+      operationId: createDocument
+      responses:
+        '201':
+          description: Created
+  /documents/{id}:
+    get:
+      tags:
+      - Documents
+      operationId: getDocument
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /applications:
+    get:
+      tags:
+      - Regulatory Case
+      operationId: listApplications
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Regulatory Case
+      operationId: createApplication
+      responses:
+        '201':
+          description: Created
+  /applications/{id}:
+    get:
+      tags:
+      - Regulatory Case
+      operationId: getApplication
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /cases:
+    get:
+      tags:
+      - Regulatory Case
+      operationId: listCases
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Regulatory Case
+      operationId: createCase
+      responses:
+        '201':
+          description: Created
+  /cases/{id}:
+    get:
+      tags:
+      - Regulatory Case
+      operationId: getCase
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /decisions:
+    get:
+      tags:
+      - Regulatory Case
+      operationId: listDecisions
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Regulatory Case
+      operationId: createDecision
+      responses:
+        '201':
+          description: Created
+  /decisions/{id}:
+    get:
+      tags:
+      - Regulatory Case
+      operationId: getDecision
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /registrations:
+    get:
+      tags:
+      - Registration
+      operationId: listRegistrations
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Registration
+      operationId: createRegistration
+      responses:
+        '201':
+          description: Created
+  /registrations/{id}:
+    get:
+      tags:
+      - Registration
+      operationId: getRegistration
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /licenses:
+    get:
+      tags:
+      - Licensing
+      operationId: listLicenses
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Licensing
+      operationId: createLicense
+      responses:
+        '201':
+          description: Created
+  /licenses/{id}:
+    get:
+      tags:
+      - Licensing
+      operationId: getLicense
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /certificates:
+    get:
+      tags:
+      - Certificates
+      operationId: listCertificates
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Certificates
+      operationId: createCertificate
+      responses:
+        '201':
+          description: Created
+  /certificates/{id}:
+    get:
+      tags:
+      - Certificates
+      operationId: getCertificate
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /products:
+    get:
+      tags:
+      - Products
+      operationId: listProducts
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Products
+      operationId: createProduct
+      responses:
+        '201':
+          description: Created
+  /products/{id}:
+    get:
+      tags:
+      - Products
+      operationId: getProduct
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /feed:
+    get:
+      tags:
+      - Feed
+      operationId: listFeed
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Feed
+      operationId: createFeed
+      responses:
+        '201':
+          description: Created
+  /feed/{id}:
+    get:
+      tags:
+      - Feed
+      operationId: getFeed
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /farms:
+    get:
+      tags:
+      - Farms
+      operationId: listFarms
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Farms
+      operationId: createFarm
+      responses:
+        '201':
+          description: Created
+  /farms/{id}:
+    get:
+      tags:
+      - Farms
+      operationId: getFarm
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /animals:
+    get:
+      tags:
+      - Animals
+      operationId: listAnimals
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Animals
+      operationId: createAnimal
+      responses:
+        '201':
+          description: Created
+  /animals/{id}:
+    get:
+      tags:
+      - Animals
+      operationId: getAnimal
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /movements:
+    get:
+      tags:
+      - Movement
+      operationId: listMovements
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Movement
+      operationId: createMovement
+      responses:
+        '201':
+          description: Created
+  /movements/{id}:
+    get:
+      tags:
+      - Movement
+      operationId: getMovement
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /diseases:
+    get:
+      tags:
+      - Animal Health
+      operationId: listDiseases
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Animal Health
+      operationId: createDisease
+      responses:
+        '201':
+          description: Created
+  /diseases/{id}:
+    get:
+      tags:
+      - Animal Health
+      operationId: getDisease
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /disease-cases:
+    get:
+      tags:
+      - Animal Health
+      operationId: listDiseaseCases
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Animal Health
+      operationId: createDiseaseCase
+      responses:
+        '201':
+          description: Created
+  /disease-cases/{id}:
+    get:
+      tags:
+      - Animal Health
+      operationId: getDiseaseCase
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /outbreaks:
+    get:
+      tags:
+      - Animal Health
+      operationId: listOutbreaks
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Animal Health
+      operationId: createOutbreak
+      responses:
+        '201':
+          description: Created
+  /outbreaks/{id}:
+    get:
+      tags:
+      - Animal Health
+      operationId: getOutbreak
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /vaccination-campaigns:
+    get:
+      tags:
+      - Animal Health
+      operationId: listVaccinationCampaigns
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Animal Health
+      operationId: createVaccinationCampaign
+      responses:
+        '201':
+          description: Created
+  /vaccination-campaigns/{id}:
+    get:
+      tags:
+      - Animal Health
+      operationId: getVaccinationCampaign
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /inspections:
+    get:
+      tags:
+      - Inspection
+      operationId: listInspections
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Inspection
+      operationId: createInspection
+      responses:
+        '201':
+          description: Created
+  /inspections/{id}:
+    get:
+      tags:
+      - Inspection
+      operationId: getInspection
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /findings:
+    get:
+      tags:
+      - Compliance
+      operationId: listFindings
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Compliance
+      operationId: createFinding
+      responses:
+        '201':
+          description: Created
+  /findings/{id}:
+    get:
+      tags:
+      - Compliance
+      operationId: getFinding
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /capa:
+    get:
+      tags:
+      - Compliance
+      operationId: listCapa
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Compliance
+      operationId: createCapa
+      responses:
+        '201':
+          description: Created
+  /capa/{id}:
+    get:
+      tags:
+      - Compliance
+      operationId: getCapa
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /enforcement-cases:
+    get:
+      tags:
+      - Enforcement
+      operationId: listEnforcementCases
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Enforcement
+      operationId: createEnforcementCase
+      responses:
+        '201':
+          description: Created
+  /enforcement-cases/{id}:
+    get:
+      tags:
+      - Enforcement
+      operationId: getEnforcementCase
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/samples:
+    get:
+      tags:
+      - Laboratory
+      operationId: listLaboratorySamples
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Laboratory
+      operationId: createLaboratorySample
+      responses:
+        '201':
+          description: Created
+  /laboratory/samples/{id}:
+    get:
+      tags:
+      - Laboratory
+      operationId: getLaboratorySample
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/test-requests:
+    get:
+      tags:
+      - Laboratory
+      operationId: listLaboratoryTestRequests
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Laboratory
+      operationId: createLaboratoryTestRequest
+      responses:
+        '201':
+          description: Created
+  /laboratory/test-requests/{id}:
+    get:
+      tags:
+      - Laboratory
+      operationId: getLaboratoryTestRequest
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/results:
+    get:
+      tags:
+      - Laboratory
+      operationId: listLaboratoryResults
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Laboratory
+      operationId: createLaboratoryResult
+      responses:
+        '201':
+          description: Created
+  /laboratory/results/{id}:
+    get:
+      tags:
+      - Laboratory
+      operationId: getLaboratoryResult
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/operators:
+    get:
+      tags:
+      - Trade
+      operationId: listTradeOperators
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Trade
+      operationId: createTradeOperator
+      responses:
+        '201':
+          description: Created
+  /trade/operators/{id}:
+    get:
+      tags:
+      - Trade
+      operationId: getTradeOperator
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/permits:
+    get:
+      tags:
+      - Trade
+      operationId: listTradePermits
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Trade
+      operationId: createTradePermit
+      responses:
+        '201':
+          description: Created
+  /trade/permits/{id}:
+    get:
+      tags:
+      - Trade
+      operationId: getTradePermit
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments:
+    get:
+      tags:
+      - Trade
+      operationId: listTradeShipments
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Trade
+      operationId: createTradeShipment
+      responses:
+        '201':
+          description: Created
+  /trade/shipments/{id}:
+    get:
+      tags:
+      - Trade
+      operationId: getTradeShipment
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /aquaculture/facilities:
+    get:
+      tags:
+      - Fisheries
+      operationId: listAquacultureFacilities
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Fisheries
+      operationId: createAquacultureFacilitie
+      responses:
+        '201':
+          description: Created
+  /aquaculture/facilities/{id}:
+    get:
+      tags:
+      - Fisheries
+      operationId: getAquacultureFacilitie
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /aquaculture/stock-batches:
+    get:
+      tags:
+      - Fisheries
+      operationId: listAquacultureStockBatches
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Fisheries
+      operationId: createAquacultureStockBatche
+      responses:
+        '201':
+          description: Created
+  /aquaculture/stock-batches/{id}:
+    get:
+      tags:
+      - Fisheries
+      operationId: getAquacultureStockBatche
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /gis/layers:
+    get:
+      tags:
+      - GIS
+      operationId: listGisLayers
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - GIS
+      operationId: createGisLayer
+      responses:
+        '201':
+          description: Created
+  /gis/layers/{id}:
+    get:
+      tags:
+      - GIS
+      operationId: getGisLayer
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /reports:
+    get:
+      tags:
+      - Analytics
+      operationId: listReports
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Analytics
+      operationId: createReport
+      responses:
+        '201':
+          description: Created
+  /reports/{id}:
+    get:
+      tags:
+      - Analytics
+      operationId: getReport
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /integrations:
+    get:
+      tags:
+      - Integration
+      operationId: listIntegrations
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - Integration
+      operationId: createIntegration
+      responses:
+        '201':
+          description: Created
+  /integrations/{id}:
+    get:
+      tags:
+      - Integration
+      operationId: getIntegration
+      responses:
+        '200':
+          description: OK
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /applications/{id}/submit:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: submitApplication
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /applications/{id}/withdraw:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: withdrawApplication
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /applications/{id}/request-information:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: requestApplicationInformation
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /applications/{id}/respond-information:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: respondApplicationInformation
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /cases/{id}/assign:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: assignCase
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /cases/{id}/complete-review:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: completeCaseReview
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /cases/{id}/decisions:
+    post:
+      tags:
+      - Regulatory Case
+      operationId: createRegulatoryDecision
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /registrations/{id}/renew:
+    post:
+      tags:
+      - Registration
+      operationId: renewRegistration
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /registrations/{id}/vary:
+    post:
+      tags:
+      - Registration
+      operationId: varyRegistration
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /registrations/{id}/suspend:
+    post:
+      tags:
+      - Registration
+      operationId: suspendRegistration
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /registrations/{id}/revoke:
+    post:
+      tags:
+      - Registration
+      operationId: revokeRegistration
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /licenses/{id}/renew:
+    post:
+      tags:
+      - Licensing
+      operationId: renewLicense
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /licenses/{id}/amend:
+    post:
+      tags:
+      - Licensing
+      operationId: amendLicense
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /licenses/{id}/suspend:
+    post:
+      tags:
+      - Licensing
+      operationId: suspendLicense
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /licenses/{id}/restore:
+    post:
+      tags:
+      - Licensing
+      operationId: restoreLicense
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /licenses/{id}/revoke:
+    post:
+      tags:
+      - Licensing
+      operationId: revokeLicense
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /certificates/{id}/revoke:
+    post:
+      tags:
+      - Certificates
+      operationId: revokeCertificate
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /facilities/{id}/establishment-applications:
+    post:
+      tags:
+      - Facilities
+      operationId: createFacilityEstablishmentApplication
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /facilities/{id}/production-lines:
+    post:
+      tags:
+      - Facilities
+      operationId: createFacilityProductionLine
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /facilities/{id}/gmp-assessments:
+    post:
+      tags:
+      - Facilities
+      operationId: createGmpAssessment
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /products/{id}/versions:
+    post:
+      tags:
+      - Products
+      operationId: createProductVersion
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /products/{id}/packages:
+    post:
+      tags:
+      - Products
+      operationId: createProductPackage
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /products/{id}/registration-applications:
+    post:
+      tags:
+      - Products
+      operationId: createProductRegistrationApplication
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /products/{id}/batches:
+    post:
+      tags:
+      - Products
+      operationId: createProductBatch
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /feed/{id}/formulas:
+    post:
+      tags:
+      - Feed
+      operationId: createFeedFormula
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /inspections/{id}/assign:
+    post:
+      tags:
+      - Inspection
+      operationId: assignInspection
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /inspections/{id}/visits:
+    post:
+      tags:
+      - Inspection
+      operationId: createInspectionVisit
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /inspections/{id}/findings:
+    post:
+      tags:
+      - Inspection
+      operationId: createInspectionFinding
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /inspections/{id}/complete:
+    post:
+      tags:
+      - Inspection
+      operationId: completeInspection
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /capa/{id}/submit:
+    post:
+      tags:
+      - Compliance
+      operationId: submitCapa
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /capa/{id}/verify:
+    post:
+      tags:
+      - Compliance
+      operationId: verifyCapa
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /enforcement-cases/{id}/actions:
+    post:
+      tags:
+      - Enforcement
+      operationId: createEnforcementAction
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /enforcement-cases/{id}/appeals:
+    post:
+      tags:
+      - Enforcement
+      operationId: createEnforcementAppeal
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/samples/{id}/custody-events:
+    post:
+      tags:
+      - Laboratory
+      operationId: createSampleCustodyEvent
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/results/{id}/validate:
+    post:
+      tags:
+      - Laboratory
+      operationId: validateLaboratoryResult
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/results/{id}/approve:
+    post:
+      tags:
+      - Laboratory
+      operationId: approveLaboratoryResult
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /laboratory/results/{id}/amend:
+    post:
+      tags:
+      - Laboratory
+      operationId: amendLaboratoryResult
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /movements/{id}/authorize:
+    post:
+      tags:
+      - Movement
+      operationId: authorizeMovement
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /movements/{id}/depart:
+    post:
+      tags:
+      - Movement
+      operationId: departMovement
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /movements/{id}/arrive:
+    post:
+      tags:
+      - Movement
+      operationId: arriveMovement
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /movements/{id}/complete:
+    post:
+      tags:
+      - Movement
+      operationId: completeMovement
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /disease-cases/{id}/investigations:
+    post:
+      tags:
+      - Animal Health
+      operationId: createDiseaseInvestigation
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /disease-cases/{id}/samples:
+    post:
+      tags:
+      - Animal Health
+      operationId: createDiseaseSample
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /disease-cases/{id}/confirm:
+    post:
+      tags:
+      - Animal Health
+      operationId: confirmDiseaseCase
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /outbreaks/{id}/zones:
+    post:
+      tags:
+      - Animal Health
+      operationId: createOutbreakZone
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /outbreaks/{id}/control-measures:
+    post:
+      tags:
+      - Animal Health
+      operationId: createOutbreakControlMeasure
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /outbreaks/{id}/close:
+    post:
+      tags:
+      - Animal Health
+      operationId: closeOutbreak
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments/{id}/declare:
+    post:
+      tags:
+      - Trade
+      operationId: declareShipment
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments/{id}/risk-assess:
+    post:
+      tags:
+      - Trade
+      operationId: riskAssessShipment
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments/{id}/inspection:
+    post:
+      tags:
+      - Trade
+      operationId: requestShipmentInspection
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments/{id}/quarantine:
+    post:
+      tags:
+      - Trade
+      operationId: startShipmentQuarantine
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments/{id}/clearance:
+    post:
+      tags:
+      - Trade
+      operationId: decideShipmentClearance
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /trade/shipments/{id}/certificates:
+    post:
+      tags:
+      - Trade
+      operationId: issueShipmentCertificate
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /aquaculture/stock-batches/{id}/production:
+    post:
+      tags:
+      - Fisheries
+      operationId: recordAquacultureProduction
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /aquaculture/stock-batches/{id}/harvest:
+    post:
+      tags:
+      - Fisheries
+      operationId: recordAquacultureHarvest
+      responses:
+        '200':
+          description: Command accepted/completed
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+  /certificates/verify/{token}:
+    get:
+      tags:
+      - Certificates
+      operationId: verifyCertificate
+      responses:
+        '200':
+          description: Verification result
+      parameters:
+      - name: token
+        in: path
+        required: true
+        schema:
+          type: string
+      security: []
+  /health:
+    get:
+      tags:
+      - Platform
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Healthy
+      security: []
+  /ready:
+    get:
+      tags:
+      - Platform
+      operationId: readinessCheck
+      responses:
+        '200':
+          description: Ready
+      security: []
+  /public/service-catalog:
+    get:
+      tags: [Guided Services]
+      operationId: listPublicGuidedServices
+      summary: Browse configured public services without login
+      security: []
+      responses:
+        '200': {description: Public service catalog}
+  /public/services/{serviceCode}:
+    get:
+      tags: [Guided Services]
+      operationId: getPublicGuidedService
+      summary: Read public preparation guidance and step sequence
+      security: []
+      parameters:
+      - name: serviceCode
+        in: path
+        required: true
+        schema: {type: string}
+      responses:
+        '200': {description: Public service guide}
+        '404': {description: Service not available for public browsing}
+  /guided-services:
+    get:
+      tags: [Guided Services]
+      operationId: listGuidedServices
+      summary: List guided services available to the authenticated user
+      responses:
+        '200': {description: Guided service catalog}
+  /guided-services/{serviceCode}:
+    get:
+      tags: [Guided Services]
+      operationId: getGuidedService
+      parameters:
+      - name: serviceCode
+        in: path
+        required: true
+        schema: {type: string}
+      responses:
+        '200': {description: Guided service configuration}
+  /service-drafts:
+    get:
+      tags: [Guided Services]
+      operationId: listServiceDrafts
+      responses:
+        '200': {description: User service drafts}
+    post:
+      tags: [Guided Services]
+      operationId: startServiceDraft
+      summary: Start a version-pinned guided service draft
+      responses:
+        '201': {description: Draft created}
+  /service-drafts/{id}:
+    get:
+      tags: [Guided Services]
+      operationId: getServiceDraft
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200': {description: Draft with steps and requirement checklist}
+    patch:
+      tags: [Guided Services]
+      operationId: saveServiceDraftStep
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200': {description: Draft step saved}
+  /service-drafts/{id}/link:
+    post:
+      tags: [Guided Services]
+      operationId: linkServiceDraftToDomainRecord
+      summary: Link guided preparation to the detailed domain record created from it
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200': {description: Draft linked}
+  /my-work:
+    get:
+      tags: [Guided Services, Workflow]
+      operationId: getMyWorkQueue
+      summary: Task-centric staff/applicant work queue
+      responses:
+        '200': {description: Assigned workflow tasks, domain queues and guided drafts}
+
+  /public/platform-settings:
+    get:
+      tags: [Platform]
+      operationId: getPublicPlatformSettings
+      summary: Read public non-secret platform settings
+      responses:
+        '200': {description: Public platform settings}
+  /admin/overview:
+    get:
+      tags: [Administration]
+      operationId: getAdminOverview
+      summary: Platform administration overview
+      responses:
+        '200': {description: Runtime and administration counts}
+  /admin/users:
+    get:
+      tags: [Administration, Security]
+      operationId: listAdminUsers
+      responses:
+        '200': {description: User registry with active roles}
+  /admin/roles:
+    get:
+      tags: [Administration, Security]
+      operationId: listAdminRoles
+      responses:
+        '200': {description: Role catalog}
+  /admin/services:
+    get:
+      tags: [Administration, Guided Services]
+      operationId: listAdminServices
+      responses:
+        '200': {description: Digital service administration list}
+  /admin/services/{serviceCode}:
+    patch:
+      tags: [Administration, Guided Services]
+      operationId: updateAdminService
+      parameters:
+      - name: serviceCode
+        in: path
+        required: true
+        schema: {type: string}
+      responses:
+        '200': {description: Service configuration updated}
+  /admin/settings:
+    get:
+      tags: [Administration, Platform]
+      operationId: listPlatformSettings
+      responses:
+        '200': {description: Non-secret editable platform settings}
+  /admin/settings/{settingCode}:
+    patch:
+      tags: [Administration, Platform]
+      operationId: updatePlatformSetting
+      parameters:
+      - name: settingCode
+        in: path
+        required: true
+        schema: {type: string}
+      responses:
+        '200': {description: Platform setting updated}
+  /admin/audit:
+    get:
+      tags: [Administration, Audit]
+      operationId: getAdminAudit
+      responses:
+        '200': {description: Administrative audit log}
+  /admin/field-captures:
+    get:
+      tags: [Administration, Inspection]
+      operationId: listFieldCaptureDrafts
+      responses:
+        '200': {description: Offline field-capture staging queue}
+  /field-captures/sync:
+    post:
+      tags: [Inspection]
+      operationId: syncFieldCaptures
+      summary: Sync authenticated offline field drafts into staging
+      responses:
+        '201': {description: Field captures accepted into staging}
+
+  /reporting/config:
+    get:
+      tags: [Reporting]
+      operationId: getProvincialReportingConfig
+      summary: Get reporting regions, provinces, assignments and indicator definitions
+      responses:
+        '200': {description: Reporting configuration}
+  /reporting/dashboard:
+    get:
+      tags: [Reporting]
+      operationId: getProvincialReportingDashboard
+      parameters:
+        - {name: year, in: query, schema: {type: integer}}
+        - {name: month, in: query, schema: {type: integer, minimum: 1, maximum: 12}}
+      responses:
+        '200': {description: Reporting inbox dashboard}
+  /reporting/monthly-summary:
+    get:
+      tags: [Reporting]
+      operationId: getProvincialMonthlySummary
+      parameters:
+        - {name: year, in: query, schema: {type: integer}}
+        - {name: month, in: query, schema: {type: integer, minimum: 1, maximum: 12}}
+      responses:
+        '200': {description: Verified monthly consolidation only}
+  /reporting/submissions:
+    get:
+      tags: [Reporting]
+      operationId: listProvincialReportSubmissions
+      responses:
+        '200': {description: Reports in the authenticated user's assigned reporting scope}
+    post:
+      tags: [Reporting]
+      operationId: registerProvincialReportSubmission
+      responses:
+        '201': {description: Incoming provincial report registered}
+  /reporting/submissions/{id}:
+    get:
+      tags: [Reporting]
+      operationId: getProvincialReportSubmission
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Report with extracted indicators, trade rows and notes}
+    patch:
+      tags: [Reporting]
+      operationId: updateProvincialReportSubmission
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Draft metadata updated}
+  /reporting/submissions/{id}/indicators:
+    post:
+      tags: [Reporting]
+      operationId: saveProvincialReportIndicators
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Required indicators saved}
+  /reporting/submissions/{id}/trade-stats:
+    post:
+      tags: [Reporting]
+      operationId: addProvincialReportTradeStat
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '201': {description: Trade statistic row added}
+  /reporting/submissions/{id}/notes:
+    post:
+      tags: [Reporting]
+      operationId: addProvincialReportActivityNote
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '201': {description: Activity, issue, risk or plan note added}
+  /reporting/submissions/{id}/status:
+    post:
+      tags: [Reporting]
+      operationId: transitionProvincialReportStatus
+      summary: Move a report through receive/data-entry/review/verification workflow
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+      responses:
+        '200': {description: Status changed; monthly/weekly overlap rules applied}
+        '403': {description: Verification requires reviewer/management/admin role}
+  /reporting/regions/{regionCode}/assignment:
+    put:
+      tags: [Reporting]
+      operationId: assignProvincialReportingRegion
+      parameters:
+        - {name: regionCode, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Region work assignment updated by administrator}
+
+  /veterinary-drug-reference-data:
+    get:
+      tags: [Products]
+      summary: Get active controlled reference values for veterinary drug registration
+      responses:
+        '200': {description: Category, dosage group/form, ATCvet, distribution and route reference values}
+  /drug-registrations/next-number:
+    get:
+      tags: [Products]
+      summary: Preview the next veterinary drug registration number
+      parameters:
+      - in: query
+        name: registrationType
+        schema: {type: string, enum: [IMPORT, DOMESTIC, REPACK]}
+      responses:
+        '200': {description: Non-reserving registration number preview; final number is allocated server-side on create}
+
+  /document-intake:
+    get:
+      summary: List private intake drafts
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+    post:
+      summary: Create intake draft
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+  /document-intake/{id}:
+    get:
+      summary: Read authorized intake draft
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+  /document-intake/{id}/documents:
+    post:
+      summary: Upload bounded private document
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+  /document-intake/{id}/documents/{attachmentId}:
+    get:
+      summary: Download authorized source document
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string, format: uuid}
+      - in: path
+        name: attachmentId
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+  /document-intake/{id}/extract:
+    post:
+      summary: Extract with configured server AI provider and explicit disclosure consent
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+  /document-intake/{id}/review:
+    post:
+      summary: Confirm human review without official registration
+      tags: [Document Intake]
+      security:
+      - lvspBearer: []
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema: {type: string, format: uuid}
+      responses:
+        '200':
+          description: Operation completed; creation/upload return 201
+        '403':
+          description: Role or authorization denied
+        '409':
+          description: Stale version, duplicate file or locked draft
+        '503':
+          description: Backend, migration or AI provider is not configured
+
+components:
+  securitySchemes:
+    lvspBearer:
+      type: http
+      scheme: bearer
+    oidc:
+      type: openIdConnect
+      openIdConnectUrl: https://example.invalid/.well-known/openid-configuration
+  schemas:
+    Error:
+      type: object
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            requestId:
+              type: string
+  responses:
+    Conflict:
+      description: Business state conflict
+    Forbidden:
+      description: Authorization denied
+    ValidationError:
+      description: Validation failed

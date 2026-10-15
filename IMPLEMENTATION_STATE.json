@@ -1,0 +1,220 @@
+{
+  "project": "LVSP",
+  "version": "1.12.0-release-candidate.1",
+  "updated_at": "2026-10-15",
+  "implementation_level": "Local and disposable PostgreSQL release candidate; production deployment and departmental scope approval pending",
+  "baseline": {
+    "blueprint": "enterprise baseline complete",
+    "current_repo": "v0.8 current repository + cumulative v0.9 guided services + v1.0 PWA/admin/field + v1.1 provincial reporting + v1.2 veterinary drug controlled references and regulatory automation + v1.3 veterinary drug operational workspace"
+  },
+  "builds": {
+    "01": {
+      "status": "implemented_and_tested",
+      "scope": "platform, staging auth, master data, workflow, audit, outbox, Neon tooling"
+    },
+    "02": {
+      "status": "implemented_and_tested",
+      "scope": "case/application, decisions, registration, licensing, certificates"
+    },
+    "03": {
+      "status": "implemented_and_tested",
+      "scope": "facility/factory, product, packaging, feed foundations"
+    },
+    "04": {
+      "status": "implemented_and_tested",
+      "scope": "inspection, compliance, enforcement, LIMS foundations"
+    },
+    "05": {
+      "status": "implemented_and_tested",
+      "scope": "farm, animal identity, movement, traceability foundations"
+    },
+    "06": {
+      "status": "implemented_and_tested",
+      "scope": "disease, surveillance, outbreak, vaccination foundations"
+    },
+    "07": {
+      "status": "implemented_and_tested",
+      "scope": "trade, border, certificates, fisheries/aquaculture foundations"
+    },
+    "08": {
+      "status": "implemented_and_tested",
+      "scope": "GIS, analytics/integration registry and platform hardening foundations"
+    },
+    "priority_v05_v08": {
+      "status": "implemented_and_tested",
+      "scope": "veterinary drug registry, multi-presentation, Excel bulk import, legacy trade/ANIMUSE, detailed print, Company Master multi-site"
+    },
+    "09": {
+      "status": "implemented_and_tested_local",
+      "scope": "public guided service catalog, versioned service guidance/requirements/steps, guided drafts, My Work queue, linkage to detailed priority forms"
+    },
+    "10": {
+      "status": "implemented_and_tested_local",
+      "scope": "installable Staff PWA, central Admin Center, safe non-secret platform settings, Field PWA with offline draft queue and authenticated staging sync"
+    },
+    "11": {
+      "status": "implemented_and_tested_local",
+      "scope": "provincial incoming report registry, North/Central/South work allocation, required-indicator entry, trade statistics, review/verification, anti-double-counting, monthly consolidation and draft narrative"
+    },
+    "13": {
+      "status": "implemented_and_tested_local",
+      "scope": "veterinary drug operational application API, six-section staff dossier workspace, parties/presentations/documents/reviews, command lifecycle, audit/outbox and official registration linkage"
+    },
+    "14": {
+      "status": "implemented_and_tested_local",
+      "scope": "legacy parity: persistent multi-registration internal memo, presentation snapshots, trade coordination checklist, shared drug/trade regulatory report builder, internal-role security"
+    },
+    "14.1": {
+      "status": "implemented_and_tested_local",
+      "scope": "VM-1003 veterinary drug review-first staff UI; no duplicate 8-step data entry"
+    },
+    "15": {
+      "status": "implemented_and_tested_local",
+      "scope": "workspace consolidation phase 1: print reliability, memo A4, central reports, local memo center, disabled provincial queue cleanup, VM-1003 review-first presentation"
+    },
+    "16": {
+      "status": "implemented_and_tested_local",
+      "scope": "true legacy task-centric Veterinary Drug and Import/Export/Transit workspaces phase 1; no DB migration"
+    },
+    "17": {
+      "status": "implemented_pending_live_neon_migration",
+      "scope": "individual database login, password hashing, RBAC module write guards, public read-only overview/registry, admin user APIs, forced password change"
+    },
+    "18": {
+      "status": "implemented_pending_live_neon_migration",
+      "scope": "national access foundation: public module roadmap, staff provisioning UI, Central/Province/District/Checkpoint organization and scope model, scoped role assignment, checkpoint/licensing foundation, draft legal delegation matrix"
+    },
+    "18.1": {
+      "status": "implemented_pending_local_full_test",
+      "scope": "fix blank trade permit print using isolated print document; make all public LVSP modules inspectable with roadmap/access details while preserving read-only security"
+    },
+    "18.2": {
+      "status": "implemented_pending_local_full_test",
+      "scope": "search-first public portal; no default drug registry table; unified public search across active veterinary drug registrations, completed trade permits/notification letters, and module/service catalog by registration number, permit/application/decision number, medicine/document name, or module name"
+    },
+    "18.2-fix1": {
+      "status": "implemented_pending_local_full_test",
+      "scope": "preserve v1.8.1 public module security/context regression wording while enabling unified public search"
+    },
+    "19": {
+      "status": "implemented_pending_local_full_test_and_neon_000840",
+      "scope": "boss-Excel-aligned annual import plan tracking and analytics: quantity/value/item-count tracking bases, plan-item linkage, approved vs actual clearance, safe unit compatibility, company/product/checkpoint/origin rankings, transaction drill-down, Excel bulk auto-mapping and Plan vs Actual detail"
+    },
+    "19-fix1": {
+      "status": "implemented_pending_full_local_test",
+      "scope": "TypeScript Map typing fix for Annual Plan item option labels; no functional or database logic changes"
+    },
+    "1.10": {
+      "status": "implemented_pending_full_local_test",
+      "scope": "Hybrid reporting architecture: Central executive overview + per-module reports; generic report builder for Company, Product, Devices, Inspections, Laboratory, Disease, Border/Shipments and GIS; planned modules visible without fake data; module-level report buttons."
+    },
+    "department_operations": {
+      "status": "implemented_and_tested_local_and_disposable_postgresql",
+      "scope": "Monthly work and LAK budget entries; draft/edit/submit/return/verify; separate reviewer; optimistic concurrency; verified locks; transactional audit/outbox; CSV export"
+    }
+  },
+  "tests": {
+    "local_automated_tests": 101,
+    "status": "pass",
+    "disposable_postgresql": "fresh 114 migrations + 12 seeds + login, monthly summary, budget lifecycle, concurrency, audit/outbox and database immutability checks passed",
+    "live_neon": "read-only ledger check: 112 tracked migrations, no checksum mismatch; no live writes"
+  },
+  "database": {
+    "migrations": 114,
+    "seed_files": 12,
+    "guided_service_migration": "000740_guided_services_workflow.sql",
+    "pwa_admin_field_migration": "000750_pwa_admin_field_foundation.sql",
+    "static_validation": "pass",
+    "live_neon_v100_execution": "ledger confirmed",
+    "provincial_reporting_migration": "000760_provincial_reporting_consolidation.sql",
+    "live_neon_v110_execution": "ledger confirmed",
+    "physical_tables": 264,
+    "import_plan_analytics_migration": "000840_import_plan_analytics.sql",
+    "pending_live_migrations": [
+      "000920_trade_permit_report_validity_columns.sql",
+      "000930_department_operations.sql"
+    ]
+  },
+  "priority_guided_services": [
+    "VM-1003",
+    "TR-1021",
+    "TR-1007"
+  ],
+  "production_pending": [
+    "online hosting/domain/HTTPS and deployment pipeline",
+    "official Lao regulatory service requirements/SOP/legal verification",
+    "object storage for legal evidence and attachments",
+    "email/SMS/notification provider",
+    "digital signature/PKI provider",
+    "official Customs/NSW/e-Certificate interfaces and agreements",
+    "complete guided journeys for remaining DLF domains using real DLF forms/SOPs",
+    "visual Service Builder and controlled workflow/template administration for approved administrators",
+    "online staging/UAT, security review, performance test, backup/DR and production deployment",
+    "provincial report binary attachment object-storage integration and provincial/direct-entry UAT",
+    "Review and apply pending 000920/000930 against the intended database after backup",
+    "Confirm laovetdb GitHub owner and Vercel project; preview deployment and UAT",
+    "Confirm complete Veterinary Services Division task inventory and official forms"
+  ],
+  "priority_operational_modules": {
+    "veterinary_drug_registration_v12": {
+      "status": "implemented_and_tested",
+      "scope": "controlled Category/Dosage Group/Dosage Form/ATCvet/Distribution/Route; server-side registration numbering; DLF Date → Issue Date; automatic expiry; manual-number audit source"
+    }
+  },
+  "national_e_cert_foundation": {
+    "status": "SOURCE_READY_MIGRATION_NOT_APPLIED",
+    "migration": "000850_national_ecert_verification_foundation.sql",
+    "publicVerification": "/verify.html",
+    "principles": [
+      "structured-data-first",
+      "public-safe-verification",
+      "acknowledgement-lifecycle",
+      "replacement-rejection-cancellation",
+      "central-province-district-checkpoint-scope",
+      "paper-fallback",
+      "UNCEFACT-eCERT-ready",
+      "G2G-API-ready",
+      "legal-authority-not-hard-coded"
+    ]
+  },
+  "release_candidate": {
+    "source": "LVSP_V17_ONLINE_AUTH + preserved Phase2 source",
+    "department_scope": "Veterinary Services Division; additional divisions require later approval",
+    "publish_status": "protected Vercel Preview deployed; production unchanged; GitHub push pending",
+    "local_data_incident": "Initial legacy test run reset the original ONLINE_AUTH runtime local JSON; previous contents could not be established. Neon was not modified. All subsequent tests use isolated files."
+  },
+  "document_intake_pilot": {
+    "status": "private_neon_storage_validated_preview_ai_activation_pending",
+    "code": "existing monorepo",
+    "migration": "000940_document_intake_pilot.sql",
+    "productionApplied": false,
+    "productionDeployed": false,
+    "liveAIValidated": false,
+    "liveObjectStorageValidated": true,
+    "remaining": [
+      "retention/scanning and browser/deployed API verification",
+      "AI model/key and data handling approval",
+      "assigned reviewer access",
+      "master-data matching and regulatory checklist",
+      "review-to-official-record mapping",
+      "staging UI QA and verified deployment source"
+    ],
+    "validation": {
+      "build": "passed",
+      "regressionTestsPassed": 117,
+      "migrationsFromZero": 115,
+      "physicalTables": 266,
+      "postgresIntakeFlow": "passed: private upload, mocked Gemini extraction, provider-specific disclosure consent, review and audit; no live external calls",
+      "productionChanges": false
+    },
+    "preferredAIProvider": "gemini",
+    "preview": {
+      "database": "lvsp_preview_20261015",
+      "storageBucket": "lvsp-preview-dossiers",
+      "storageMode": "neon-s3",
+      "productionDataCopied": false,
+      "liveSyntheticStorageFlow": "upload/download/anonymous-denial passed",
+      "geminiSecretScopeApproval": "pending"
+    }
+  }
+}

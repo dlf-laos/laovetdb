@@ -1,0 +1,10 @@
+{
+  // TEMPLATE ONLY — do not deploy until the Worker entrypoint is confirmed.
+  "name": "lvsp",
+  "main": "REPLACE_WITH_CONFIRMED_WORKER_ENTRYPOINT",
+  "compatibility_date": "2026-08-16",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "APP_ENV": "staging"
+  }
+}

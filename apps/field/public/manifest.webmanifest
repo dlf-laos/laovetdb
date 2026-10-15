@@ -1,0 +1,16 @@
+{
+  "id":"/field/",
+  "name":"LVSP Field",
+  "short_name":"LVSP Field",
+  "description":"Offline-first field capture for veterinary inspection and field work",
+  "start_url":"/field/",
+  "scope":"/field/",
+  "display":"standalone",
+  "background_color":"#f1f5f9",
+  "theme_color":"#166534",
+  "lang":"lo",
+  "icons":[
+    {"src":"/field/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"/field/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

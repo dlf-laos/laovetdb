@@ -1,0 +1,38 @@
+{
+  "name": "lvsp",
+  "version": "1.12.0-rc.1",
+  "private": true,
+  "type": "module",
+  "description": "Lao Veterinary Services Platform \u2014 executable development build plus authoritative PostgreSQL migrations",
+  "scripts": {
+    "build": "tsc -p packages/shared-types/tsconfig.json && tsc -p packages/validation/tsconfig.json && tsc -p apps/web/tsconfig.json && tsc -p apps/field/tsconfig.json && tsc -p apps/api/tsconfig.json",
+    "start": "node apps/api/dist/server.js",
+    "dev": "npm run build && node apps/api/dist/server.js",
+    "test": "npm run build && node scripts/run-tests.mjs",
+    "validate": "python3 scripts/validate_package.py",
+    "seed:demo": "node scripts/seed_demo.mjs",
+    "preflight": "npm run validate && npm test",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "db:seed": "node scripts/db-seed.mjs",
+    "db:check": "node scripts/db-check.mjs",
+    "test:packs": "npm run build && NODE_ENV=test node --test --test-concurrency=1 apps/api/test/pack*.test.mjs",
+    "build:vercel": "npm run build && node scripts/build-vercel.mjs",
+    "db:readiness": "node scripts/check-db-readiness.mjs",
+    "review": "bash START_REVIEW.command",
+    "test:intake:postgres": "npm run build && node scripts/test-document-intake-postgres.mjs"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1152.0",
+    "pg": "8.23.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

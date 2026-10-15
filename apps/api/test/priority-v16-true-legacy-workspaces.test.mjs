@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const app=fs.readFileSync(new URL('../../web/src/app.ts',import.meta.url),'utf8');
+const work=fs.readFileSync(new URL('../../web/src/legacy-workspaces-v16.ts',import.meta.url),'utf8');
+const api=fs.readFileSync(new URL('../src/core/legacy-parity.ts',import.meta.url),'utf8');
+test('v1.6 replaces generic priority landing pages with task-centric Drug and Trade workspaces',()=>{assert.match(app,/renderDrugLegacyWorkspace/);assert.match(app,/renderTradeLegacyWorkspace/);assert.match(app,/key:'trade_workspace'/);assert.match(work,/WORKSPACE A · REGISTRATION/);assert.match(work,/WORKSPACE B · TRADE & ANIMUSE/);assert.match(work,/Dossiers \/ Review/);assert.match(work,/Plans & Balance/);assert.match(work,/Applications & Permits/);assert.match(work,/Clearance/);});
+test('v1.6 consolidates navigation without deleting underlying shared resources',()=>{assert.match(app,/navHidden:true/);assert.match(app,/key:'provincial_reporting'/);assert.match(app,/return renderProvincialReporting\(\)/);for(const key of ['veterinary_devices','import_plans','import_plan_items','import_applications','import_application_items','animuse'])assert.match(app,new RegExp(`key:'${key}'.*navHidden:true`));assert.match(app,/key:'companies'/);assert.match(app,/key:'products'/);assert.match(app,/key:'regulatory_reports'/);});
+test('v1.6 trade entry and permit print are movement-aware',()=>{assert.match(app,/name=\"importType\"/);assert.match(app,/<option>IMPORT<\/option><option>EXPORT<\/option><option>TRANSIT<\/option>/);assert.match(app,/name=\"destinationCountry\"/);assert.match(app,/name=\"checkpointOut\"/);assert.match(app,/name=\"transportMode\"/);assert.match(app,/movement===x\?'☑':'□'/);assert.match(app,/Origin → Destination/);});
+test('v1.6 annual plan overview uses actual cleared balance view and remains source-only',()=>{assert.match(api,/annualPlanOverview/);assert.match(api,/analytics\.v_import_plan_item_balance/);assert.match(api,/actual_cleared_quantity/);assert.match(api,/annual-plan-overview/);});

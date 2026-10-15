@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="lo">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LVSP — Lao Veterinary Services Platform</title>
+  <meta name="theme-color" content="#0b3a2b">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">LV</div><div><b>LVSP</b><small>Lao Veterinary Services Platform</small></div></div>
+    <nav id="nav"></nav>
+    <div class="side-foot"><span class="dot"></span> <span id="side-storage-label">Development Mode</span></div>
+  </aside>
+  <main>
+    <div id="maintenance-banner" class="maintenance-banner hidden"></div>
+    <header class="topbar">
+      <div><h1 id="page-title">LVSP</h1><p id="page-subtitle"></p></div>
+      <div class="top-actions"><span id="network-state" class="mode online">Online</span><span id="storage-mode" class="mode"></span><button id="update-btn" class="ghost hidden">↻ Update</button><button id="install-btn" class="ghost hidden">⬇ Install App</button><a id="field-app-link" class="ghost link-btn" href="/field/" target="_blank">📱 Field</a><button id="lang-btn" class="ghost">EN</button><button id="logout-btn" class="ghost">Logout</button><div id="user-badge" class="user">DLF</div></div>
+    </header>
+    <section id="stats" class="stats"></section>
+    <section id="data-panel" class="panel">
+      <div class="panel-head"><div><b id="record-count">0 ລາຍການ</b><span>Single Source of Truth</span></div><div class="toolbar"><input id="search" placeholder="ຄົ້ນຫາ / Search"><a id="template-btn" class="ghost hidden" download>⬇ Excel Template</a><button id="bulk-btn" class="ghost hidden">⬆ Import Excel</button><button id="create-btn" class="primary">+ ເພີ່ມ / Add</button></div></div>
+      <div class="table-wrap"><table><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div>
+    </section>
+    <section id="custom-page" class="custom-page hidden"></section>
+    <footer>LVSP • Department of Livestock and Fisheries • Dossier Intake &amp; Review · 20261016</footer>
+  </main>
+</div>
+<dialog id="create-modal"><form method="dialog" id="create-form"><div class="modal-head"><h2 id="modal-title">Create</h2><button type="button" id="cancel-btn">×</button></div><div id="form-fields" class="form-grid"></div><div class="modal-actions"><button type="button" id="cancel-btn-2" onclick="document.querySelector('#create-modal').close()">Cancel</button><button class="primary" type="submit">Save</button></div></form></dialog>
+<dialog id="bulk-modal"><div class="modal-head"><h2>Excel Bulk Import / ນຳເຂົ້າ Excel</h2><button type="button" id="bulk-close">×</button></div><div class="bulk-body"><label><span id="bulk-parent-label">Select parent</span><select id="bulk-parent"></select></label><label><span>Excel file (.xlsx/.xls/.csv)</span><input id="bulk-file" type="file" accept=".xlsx,.xls,.csv"></label><div class="bulk-actions"><button id="bulk-preview" class="primary" type="button">1. Preview & Validate</button><button id="bulk-commit" class="primary" type="button" disabled>2. Import to Neon</button></div><div id="bulk-summary"></div><div class="table-wrap bulk-preview"><table><thead><tr><th>Row</th><th>Type</th><th>Name</th><th>Reg No.</th><th>Pack</th><th>Qty</th><th>Status</th><th>Message</th></tr></thead><tbody id="bulk-preview-body"></tbody></table></div></div></dialog>
+<dialog id="detail-modal" class="detail-dialog"><div class="modal-head"><div><h2 id="detail-title">Detail</h2><p id="detail-subtitle"></p></div><button type="button" id="detail-close">×</button></div><div id="detail-body" class="detail-body"></div><div id="detail-actions" class="detail-actions"></div></dialog>
+<div id="print-area" aria-hidden="true"></div>
+<dialog id="login-modal" class="login-dialog"><form id="login-form"><div class="modal-head"><h2>LVSP Sign in / ເຂົ້າລະບົບ</h2></div><div class="form-grid"><label><span>Username</span><input name="username" autocomplete="username" placeholder="Username" required></label><label><span>Password</span><input name="password" type="password" autocomplete="current-password" placeholder="Password" required></label></div><p id="login-error" class="error"></p><div class="login-public"><button id="browse-public-btn" class="ghost" type="button">🌐 ພາບລວມສາທາລະນະ / Public overview</button><button id="browse-services-btn" class="ghost" type="button">🧭 ຄົ້ນເບິ່ງບໍລິການ / Browse services</button><small>ສາມາດເບິ່ງຄູ່ມືບໍລິການໄດ້ໂດຍບໍ່ Login. ການຍື່ນຄຳຮ້ອງຕ້ອງເຂົ້າລະບົບ.</small></div><div class="modal-actions"><button class="primary" type="submit">Sign in</button></div></form></dialog>
+<dialog id="password-modal" class="login-dialog"><form id="password-form"><div class="modal-head"><h2>Change password / ປ່ຽນລະຫັດຜ່ານ</h2></div><p>For security, this account must set a new password before continuing.</p><div class="form-grid"><label><span>Current password</span><input name="currentPassword" type="password" autocomplete="current-password" required></label><label><span>New password</span><input name="newPassword" type="password" autocomplete="new-password" minlength="12" required></label><label><span>Confirm new password</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="12" required></label></div><p id="password-error" class="error"></p><div class="modal-actions"><button class="primary" type="submit">Save new password</button></div></form></dialog>
+<div id="toast" class="toast"></div>
+<script type="module" src="/app.js?v=20261004-rc1"></script>
+<script src="/lvsp-ecert-launcher.js" defer></script>
+</body>
+</html>

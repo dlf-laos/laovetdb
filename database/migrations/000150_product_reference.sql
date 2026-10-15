@@ -1,0 +1,3 @@
+CREATE TABLE product.product_type (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), code VARCHAR(100) NOT NULL UNIQUE, name_lo TEXT NOT NULL, name_en TEXT, is_active BOOLEAN NOT NULL DEFAULT TRUE);
+CREATE TABLE product.ingredient (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), ingredient_code VARCHAR(100) UNIQUE, name_lo TEXT, name_en TEXT NOT NULL, ingredient_type VARCHAR(50), is_active BOOLEAN NOT NULL DEFAULT TRUE);
+CREATE TABLE lookup.unit_of_measure (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), code VARCHAR(30) NOT NULL UNIQUE, name_lo TEXT, name_en TEXT NOT NULL, dimension_code VARCHAR(30), is_active BOOLEAN NOT NULL DEFAULT TRUE);
