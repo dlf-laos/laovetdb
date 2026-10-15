@@ -31,3 +31,5 @@ Source ໃໝ່ແມ່ນ TypeScript monorepo ທີ່ສືບຕໍ່ LVS
 3. ກວດ migrations ທີ່ຍັງບໍ່ apply ແລະ ກຳນົດ Production environment ໃຫ້ຖືກຖານຂໍ້ມູນ/ບ່ອນເກັບເອກະສານ.
 4. ຂຶ້ນ Source ໃໝ່ໃນ GitHub ແລະ ເຊື່ອມ Vercel ກັບ repository ເພື່ອ deploy ອັດຕະໂນມັດ.
 5. ເມື່ອກວດຜ່ານ ຈຶ່ງ deploy/promote Production ແລະ ກວດລິ້ງຫຼັກອີກຄັ້ງ. ເກັບ deployment ເກົ່າໄວ້ສຳລັບ rollback.
+
+Vercel ເຊື່ອມ repository ແລ້ວ. ໃນໄລຍະກຽມ Production, `vercel.json` ຕັ້ງ `git.deploymentEnabled.main=false` ເພື່ອໃຫ້ອັບເດດ Source ໃນ main ໄດ້ໂດຍບໍ່ Deploy API ທີ່ຂາດ database/auth settings. Preview ຍັງ Deploy ອັດຕະໂນມັດໄດ້. ຕ້ອງເອົາຄ່ານີ້ອອກເມື່ອ Production ກວດຜ່ານ.

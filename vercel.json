@@ -65,5 +65,10 @@
       ]
     }
   ],
-  "installCommand": "npm ci --include=dev"
+  "installCommand": "npm ci --include=dev",
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  }
 }
