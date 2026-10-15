@@ -1,0 +1,25 @@
+{
+  "counts": {
+    "identical": 42,
+    "different": 3,
+    "missing": 1
+  },
+  "differences": [
+    {
+      "file": "PHASE2_BUNDLE_README.txt",
+      "result": "missing"
+    },
+    {
+      "file": "apps/web/src/app.ts",
+      "result": "different"
+    },
+    {
+      "file": "apps/api/src/core/postgres-store.ts",
+      "result": "different"
+    },
+    {
+      "file": "apps/api/src/server.ts",
+      "result": "different"
+    }
+  ]
+}

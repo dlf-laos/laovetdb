@@ -1,0 +1,36 @@
+--- Phase2/apps/api/src/server.ts
+
++++ Current/apps/api/src/server.ts
+
+@@ -567,4 +567,30 @@
+
+       return data?sendJson(res,200,{data,meta:{requestId:ids.requestId}},ids):sendJson(res,404,failure('NOT_FOUND','Import application not found',ids),ids);
+     }
++    if(url.pathname==='/api/v1/species' && req.method==='GET'){
++      const principal=getPrincipal(req); if(!principal.isAuthenticated)return sendJson(res,401,failure('UNAUTHENTICATED','Authentication required',ids),ids);
++      const data=store.mode==='postgres'?await (store as any).species():[]; return sendJson(res,200,{data,meta:{requestId:ids.requestId}},ids);
++    }
++    if(url.pathname==='/api/v1/units' && req.method==='GET'){
++      const principal=getPrincipal(req); if(!principal.isAuthenticated)return sendJson(res,401,failure('UNAUTHENTICATED','Authentication required',ids),ids);
++      const data=store.mode==='postgres'?await (store as any).unitsOfMeasure():[]; return sendJson(res,200,{data,meta:{requestId:ids.requestId}},ids);
++    }
++    if(url.pathname==='/api/v1/export-applications' && req.method==='POST'){
++      const principal=getPrincipal(req); if(!principal.isAuthenticated)return sendJson(res,401,failure('UNAUTHENTICATED','Authentication required',ids),ids);
++      if(store.mode!=='postgres')return sendJson(res,501,failure('POSTGRES_REQUIRED','Export applications require PostgreSQL mode',ids),ids);
++      const body=await readJson(req); const data=await (store as any).createExportApplication(body,principal.userId);
++      await store.audit({actorUserId:principal.userId,actionCode:'export_application.submit',resourceType:'export_application',resourceId:data?.application?.id,correlationId:ids.correlationId,afterData:{caseNo:data?.application?.caseNo}});
++      return sendJson(res,201,{data,meta:{requestId:ids.requestId}},ids);
++    }
++    if(url.pathname==='/api/v1/export-applications' && req.method==='GET'){
++      const principal=getPrincipal(req); if(!principal.isAuthenticated)return sendJson(res,401,failure('UNAUTHENTICATED','Authentication required',ids),ids);
++      const data=store.mode==='postgres'?await (store as any).exportApplications():[]; return sendJson(res,200,{data,meta:{requestId:ids.requestId}},ids);
++    }
++    const exportDetail=url.pathname.match(/^\/api\/v1\/export-applications\/([^/]+)\/complete$/);
++    if(exportDetail && req.method==='GET'){
++      const principal=getPrincipal(req); if(!principal.isAuthenticated)return sendJson(res,401,failure('UNAUTHENTICATED','Authentication required',ids),ids);
++      if(store.mode!=='postgres')return sendJson(res,501,failure('POSTGRES_REQUIRED','Detailed export view requires PostgreSQL mode',ids),ids);
++      const data=await (store as any).exportApplicationComplete(decodeURIComponent(exportDetail[1]));
++      return data?sendJson(res,200,{data,meta:{requestId:ids.requestId}},ids):sendJson(res,404,failure('NOT_FOUND','Export application not found',ids),ids);
++    }
+     if(url.pathname==='/api/v1/animuse/summary' && req.method==='GET'){
+       const principal=getPrincipal(req); if(!principal.isAuthenticated)return sendJson(res,401,failure('UNAUTHENTICATED','Authentication required',ids),ids);

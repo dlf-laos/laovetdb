@@ -1,0 +1,1 @@
+{"name":"@lvsp/field","private":true,"scripts":{"build":"tsc -p tsconfig.json"}}

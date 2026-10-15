@@ -1,0 +1,10 @@
+import {mkdtempSync,readdirSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+const directory=mkdtempSync(path.join(tmpdir(),'lvsp-tests-'));
+const args=process.argv.slice(2);
+const files=args.length?args:readdirSync('apps/api/test').filter(x=>x.endsWith('.test.mjs')).sort().map(x=>'apps/api/test/'+x);
+const result=spawnSync(process.execPath,['--test','--test-concurrency=1','--test-timeout=30000',...files],{stdio:'inherit',env:{...process.env,NODE_ENV:'test',AUTH_MODE:'demo',LVSP_STORAGE:'json',LVSP_LOCAL_DATA_FILE:path.join(directory,'test-data.json')}});
+if(result.error)console.error(result.error.message);
+process.exit(result.status??1);

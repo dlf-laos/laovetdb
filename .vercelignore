@@ -1,0 +1,10 @@
+.env*
+node_modules
+_backups
+_patch_backup*
+*.log
+apps/api/test
+apps/api/runtime/lvsp-data.json
+apps/api/runtime/review-data.json
+scripts/admin4_legacy_records.json
+scripts/legacy_vet_suite_export.json

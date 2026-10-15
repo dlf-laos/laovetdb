@@ -1,0 +1,38 @@
+LVSP FINAL IMPLEMENTATION PACKAGE v2.0 — VALIDATION REPORT
+Generated: 2026-08-08
+
+RESULT: STATIC PACKAGE VALIDATION PASSED
+
+Validated contents
+- 90 ordered SQL migration files exactly match the migration manifest.
+- 12 baseline seed SQL files are present and target existing tables.
+- 184 physical tables discovered in the migration set.
+- 26 PostgreSQL schemas declared.
+- 5 extensions declared.
+- 149 indexes, 27 triggers, 6 functions and 4 views detected.
+- Foreign-key target existence and migration dependency order: passed.
+- ALTER TABLE target order: passed.
+- CREATE INDEX target order: passed.
+- Reserved physical table-name guard: passed.
+- Business-table-in-public guard: passed.
+- SQL quote/comment/dollar-quote/parenthesis lexical balance: passed.
+- Consolidated LVSP_FULL_SCHEMA.sql regenerated from the current migrations and confirmed current.
+- OpenAPI 3.1 YAML parses successfully and contains 138 path entries.
+- JSON artifacts parse successfully.
+- Migration/seed shell scripts pass bash syntax checks.
+- Python validation script compiles successfully.
+
+Integrity improvements included
+- system.schema_migration records applied migration SHA-256 checksums.
+- migration runner rejects checksum changes to already-applied migrations.
+- each migration is executed atomically by the runner.
+- baseline seed files are executed atomically and written to be idempotent.
+- key official/regulatory records have hard-delete guardrails.
+- approved laboratory result versions have immutability guardrails.
+- Person/Company subtype integrity is enforced against master.party.party_kind.
+
+Important validation boundary
+This environment does not contain a live target PostgreSQL/Neon database or the user's database credentials. Therefore the package has NOT been executed against the user's Neon project, and this report is not a production deployment certificate. The next runtime gate is to run the package on an empty staging PostgreSQL/Neon database, execute all migrations and seeds, then run application integration/E2E/security/backup-restore tests.
+
+Regulatory boundary
+Official Lao legal values that were not source-verified in the specification (fees, validity periods, competent approval/signature authorities, statutory deadlines, disease-specific restrictions, laboratory limits, penalties and final certificate wording) are intentionally not fabricated. They remain versioned configuration pending official validation.

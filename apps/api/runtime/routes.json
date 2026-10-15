@@ -1,0 +1,1190 @@
+[
+  {
+    "path": "/users",
+    "method": "GET",
+    "operationId": "listUsers",
+    "summary": ""
+  },
+  {
+    "path": "/users",
+    "method": "POST",
+    "operationId": "createUser",
+    "summary": ""
+  },
+  {
+    "path": "/users/{id}",
+    "method": "GET",
+    "operationId": "getUser",
+    "summary": ""
+  },
+  {
+    "path": "/organizations",
+    "method": "GET",
+    "operationId": "listOrganizations",
+    "summary": ""
+  },
+  {
+    "path": "/organizations",
+    "method": "POST",
+    "operationId": "createOrganization",
+    "summary": ""
+  },
+  {
+    "path": "/organizations/{id}",
+    "method": "GET",
+    "operationId": "getOrganization",
+    "summary": ""
+  },
+  {
+    "path": "/admin-units",
+    "method": "GET",
+    "operationId": "listAdminUnits",
+    "summary": ""
+  },
+  {
+    "path": "/admin-units",
+    "method": "POST",
+    "operationId": "createAdminUnit",
+    "summary": ""
+  },
+  {
+    "path": "/admin-units/{id}",
+    "method": "GET",
+    "operationId": "getAdminUnit",
+    "summary": ""
+  },
+  {
+    "path": "/persons",
+    "method": "GET",
+    "operationId": "listPersons",
+    "summary": ""
+  },
+  {
+    "path": "/persons",
+    "method": "POST",
+    "operationId": "createPerson",
+    "summary": ""
+  },
+  {
+    "path": "/persons/{id}",
+    "method": "GET",
+    "operationId": "getPerson",
+    "summary": ""
+  },
+  {
+    "path": "/companies",
+    "method": "GET",
+    "operationId": "listCompanies",
+    "summary": ""
+  },
+  {
+    "path": "/companies",
+    "method": "POST",
+    "operationId": "createCompanie",
+    "summary": ""
+  },
+  {
+    "path": "/companies/{id}",
+    "method": "GET",
+    "operationId": "getCompanie",
+    "summary": ""
+  },
+  {
+    "path": "/facilities",
+    "method": "GET",
+    "operationId": "listFacilities",
+    "summary": ""
+  },
+  {
+    "path": "/facilities",
+    "method": "POST",
+    "operationId": "createFacilitie",
+    "summary": ""
+  },
+  {
+    "path": "/facilities/{id}",
+    "method": "GET",
+    "operationId": "getFacilitie",
+    "summary": ""
+  },
+  {
+    "path": "/services",
+    "method": "GET",
+    "operationId": "listServices",
+    "summary": ""
+  },
+  {
+    "path": "/services",
+    "method": "POST",
+    "operationId": "createService",
+    "summary": ""
+  },
+  {
+    "path": "/services/{id}",
+    "method": "GET",
+    "operationId": "getService",
+    "summary": ""
+  },
+  {
+    "path": "/workflows",
+    "method": "GET",
+    "operationId": "listWorkflows",
+    "summary": ""
+  },
+  {
+    "path": "/workflows",
+    "method": "POST",
+    "operationId": "createWorkflow",
+    "summary": ""
+  },
+  {
+    "path": "/workflows/{id}",
+    "method": "GET",
+    "operationId": "getWorkflow",
+    "summary": ""
+  },
+  {
+    "path": "/tasks",
+    "method": "GET",
+    "operationId": "listTasks",
+    "summary": ""
+  },
+  {
+    "path": "/tasks",
+    "method": "POST",
+    "operationId": "createTask",
+    "summary": ""
+  },
+  {
+    "path": "/tasks/{id}",
+    "method": "GET",
+    "operationId": "getTask",
+    "summary": ""
+  },
+  {
+    "path": "/documents",
+    "method": "GET",
+    "operationId": "listDocuments",
+    "summary": ""
+  },
+  {
+    "path": "/documents",
+    "method": "POST",
+    "operationId": "createDocument",
+    "summary": ""
+  },
+  {
+    "path": "/documents/{id}",
+    "method": "GET",
+    "operationId": "getDocument",
+    "summary": ""
+  },
+  {
+    "path": "/applications",
+    "method": "GET",
+    "operationId": "listApplications",
+    "summary": ""
+  },
+  {
+    "path": "/applications",
+    "method": "POST",
+    "operationId": "createApplication",
+    "summary": ""
+  },
+  {
+    "path": "/applications/{id}",
+    "method": "GET",
+    "operationId": "getApplication",
+    "summary": ""
+  },
+  {
+    "path": "/cases",
+    "method": "GET",
+    "operationId": "listCases",
+    "summary": ""
+  },
+  {
+    "path": "/cases",
+    "method": "POST",
+    "operationId": "createCase",
+    "summary": ""
+  },
+  {
+    "path": "/cases/{id}",
+    "method": "GET",
+    "operationId": "getCase",
+    "summary": ""
+  },
+  {
+    "path": "/decisions",
+    "method": "GET",
+    "operationId": "listDecisions",
+    "summary": ""
+  },
+  {
+    "path": "/decisions",
+    "method": "POST",
+    "operationId": "createDecision",
+    "summary": ""
+  },
+  {
+    "path": "/decisions/{id}",
+    "method": "GET",
+    "operationId": "getDecision",
+    "summary": ""
+  },
+  {
+    "path": "/registrations",
+    "method": "GET",
+    "operationId": "listRegistrations",
+    "summary": ""
+  },
+  {
+    "path": "/registrations",
+    "method": "POST",
+    "operationId": "createRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/registrations/{id}",
+    "method": "GET",
+    "operationId": "getRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/licenses",
+    "method": "GET",
+    "operationId": "listLicenses",
+    "summary": ""
+  },
+  {
+    "path": "/licenses",
+    "method": "POST",
+    "operationId": "createLicense",
+    "summary": ""
+  },
+  {
+    "path": "/licenses/{id}",
+    "method": "GET",
+    "operationId": "getLicense",
+    "summary": ""
+  },
+  {
+    "path": "/certificates",
+    "method": "GET",
+    "operationId": "listCertificates",
+    "summary": ""
+  },
+  {
+    "path": "/certificates",
+    "method": "POST",
+    "operationId": "createCertificate",
+    "summary": ""
+  },
+  {
+    "path": "/certificates/{id}",
+    "method": "GET",
+    "operationId": "getCertificate",
+    "summary": ""
+  },
+  {
+    "path": "/products",
+    "method": "GET",
+    "operationId": "listProducts",
+    "summary": ""
+  },
+  {
+    "path": "/products",
+    "method": "POST",
+    "operationId": "createProduct",
+    "summary": ""
+  },
+  {
+    "path": "/products/{id}",
+    "method": "GET",
+    "operationId": "getProduct",
+    "summary": ""
+  },
+  {
+    "path": "/feed",
+    "method": "GET",
+    "operationId": "listFeed",
+    "summary": ""
+  },
+  {
+    "path": "/feed",
+    "method": "POST",
+    "operationId": "createFeed",
+    "summary": ""
+  },
+  {
+    "path": "/feed/{id}",
+    "method": "GET",
+    "operationId": "getFeed",
+    "summary": ""
+  },
+  {
+    "path": "/farms",
+    "method": "GET",
+    "operationId": "listFarms",
+    "summary": ""
+  },
+  {
+    "path": "/farms",
+    "method": "POST",
+    "operationId": "createFarm",
+    "summary": ""
+  },
+  {
+    "path": "/farms/{id}",
+    "method": "GET",
+    "operationId": "getFarm",
+    "summary": ""
+  },
+  {
+    "path": "/animals",
+    "method": "GET",
+    "operationId": "listAnimals",
+    "summary": ""
+  },
+  {
+    "path": "/animals",
+    "method": "POST",
+    "operationId": "createAnimal",
+    "summary": ""
+  },
+  {
+    "path": "/animals/{id}",
+    "method": "GET",
+    "operationId": "getAnimal",
+    "summary": ""
+  },
+  {
+    "path": "/movements",
+    "method": "GET",
+    "operationId": "listMovements",
+    "summary": ""
+  },
+  {
+    "path": "/movements",
+    "method": "POST",
+    "operationId": "createMovement",
+    "summary": ""
+  },
+  {
+    "path": "/movements/{id}",
+    "method": "GET",
+    "operationId": "getMovement",
+    "summary": ""
+  },
+  {
+    "path": "/diseases",
+    "method": "GET",
+    "operationId": "listDiseases",
+    "summary": ""
+  },
+  {
+    "path": "/diseases",
+    "method": "POST",
+    "operationId": "createDisease",
+    "summary": ""
+  },
+  {
+    "path": "/diseases/{id}",
+    "method": "GET",
+    "operationId": "getDisease",
+    "summary": ""
+  },
+  {
+    "path": "/disease-cases",
+    "method": "GET",
+    "operationId": "listDiseaseCases",
+    "summary": ""
+  },
+  {
+    "path": "/disease-cases",
+    "method": "POST",
+    "operationId": "createDiseaseCase",
+    "summary": ""
+  },
+  {
+    "path": "/disease-cases/{id}",
+    "method": "GET",
+    "operationId": "getDiseaseCase",
+    "summary": ""
+  },
+  {
+    "path": "/outbreaks",
+    "method": "GET",
+    "operationId": "listOutbreaks",
+    "summary": ""
+  },
+  {
+    "path": "/outbreaks",
+    "method": "POST",
+    "operationId": "createOutbreak",
+    "summary": ""
+  },
+  {
+    "path": "/outbreaks/{id}",
+    "method": "GET",
+    "operationId": "getOutbreak",
+    "summary": ""
+  },
+  {
+    "path": "/vaccination-campaigns",
+    "method": "GET",
+    "operationId": "listVaccinationCampaigns",
+    "summary": ""
+  },
+  {
+    "path": "/vaccination-campaigns",
+    "method": "POST",
+    "operationId": "createVaccinationCampaign",
+    "summary": ""
+  },
+  {
+    "path": "/vaccination-campaigns/{id}",
+    "method": "GET",
+    "operationId": "getVaccinationCampaign",
+    "summary": ""
+  },
+  {
+    "path": "/inspections",
+    "method": "GET",
+    "operationId": "listInspections",
+    "summary": ""
+  },
+  {
+    "path": "/inspections",
+    "method": "POST",
+    "operationId": "createInspection",
+    "summary": ""
+  },
+  {
+    "path": "/inspections/{id}",
+    "method": "GET",
+    "operationId": "getInspection",
+    "summary": ""
+  },
+  {
+    "path": "/findings",
+    "method": "GET",
+    "operationId": "listFindings",
+    "summary": ""
+  },
+  {
+    "path": "/findings",
+    "method": "POST",
+    "operationId": "createFinding",
+    "summary": ""
+  },
+  {
+    "path": "/findings/{id}",
+    "method": "GET",
+    "operationId": "getFinding",
+    "summary": ""
+  },
+  {
+    "path": "/capa",
+    "method": "GET",
+    "operationId": "listCapa",
+    "summary": ""
+  },
+  {
+    "path": "/capa",
+    "method": "POST",
+    "operationId": "createCapa",
+    "summary": ""
+  },
+  {
+    "path": "/capa/{id}",
+    "method": "GET",
+    "operationId": "getCapa",
+    "summary": ""
+  },
+  {
+    "path": "/enforcement-cases",
+    "method": "GET",
+    "operationId": "listEnforcementCases",
+    "summary": ""
+  },
+  {
+    "path": "/enforcement-cases",
+    "method": "POST",
+    "operationId": "createEnforcementCase",
+    "summary": ""
+  },
+  {
+    "path": "/enforcement-cases/{id}",
+    "method": "GET",
+    "operationId": "getEnforcementCase",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/samples",
+    "method": "GET",
+    "operationId": "listLaboratorySamples",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/samples",
+    "method": "POST",
+    "operationId": "createLaboratorySample",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/samples/{id}",
+    "method": "GET",
+    "operationId": "getLaboratorySample",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/test-requests",
+    "method": "GET",
+    "operationId": "listLaboratoryTestRequests",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/test-requests",
+    "method": "POST",
+    "operationId": "createLaboratoryTestRequest",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/test-requests/{id}",
+    "method": "GET",
+    "operationId": "getLaboratoryTestRequest",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/results",
+    "method": "GET",
+    "operationId": "listLaboratoryResults",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/results",
+    "method": "POST",
+    "operationId": "createLaboratoryResult",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/results/{id}",
+    "method": "GET",
+    "operationId": "getLaboratoryResult",
+    "summary": ""
+  },
+  {
+    "path": "/trade/operators",
+    "method": "GET",
+    "operationId": "listTradeOperators",
+    "summary": ""
+  },
+  {
+    "path": "/trade/operators",
+    "method": "POST",
+    "operationId": "createTradeOperator",
+    "summary": ""
+  },
+  {
+    "path": "/trade/operators/{id}",
+    "method": "GET",
+    "operationId": "getTradeOperator",
+    "summary": ""
+  },
+  {
+    "path": "/trade/permits",
+    "method": "GET",
+    "operationId": "listTradePermits",
+    "summary": ""
+  },
+  {
+    "path": "/trade/permits",
+    "method": "POST",
+    "operationId": "createTradePermit",
+    "summary": ""
+  },
+  {
+    "path": "/trade/permits/{id}",
+    "method": "GET",
+    "operationId": "getTradePermit",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments",
+    "method": "GET",
+    "operationId": "listTradeShipments",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments",
+    "method": "POST",
+    "operationId": "createTradeShipment",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}",
+    "method": "GET",
+    "operationId": "getTradeShipment",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/facilities",
+    "method": "GET",
+    "operationId": "listAquacultureFacilities",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/facilities",
+    "method": "POST",
+    "operationId": "createAquacultureFacilitie",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/facilities/{id}",
+    "method": "GET",
+    "operationId": "getAquacultureFacilitie",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/stock-batches",
+    "method": "GET",
+    "operationId": "listAquacultureStockBatches",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/stock-batches",
+    "method": "POST",
+    "operationId": "createAquacultureStockBatche",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/stock-batches/{id}",
+    "method": "GET",
+    "operationId": "getAquacultureStockBatche",
+    "summary": ""
+  },
+  {
+    "path": "/gis/layers",
+    "method": "GET",
+    "operationId": "listGisLayers",
+    "summary": ""
+  },
+  {
+    "path": "/gis/layers",
+    "method": "POST",
+    "operationId": "createGisLayer",
+    "summary": ""
+  },
+  {
+    "path": "/gis/layers/{id}",
+    "method": "GET",
+    "operationId": "getGisLayer",
+    "summary": ""
+  },
+  {
+    "path": "/reports",
+    "method": "GET",
+    "operationId": "listReports",
+    "summary": ""
+  },
+  {
+    "path": "/reports",
+    "method": "POST",
+    "operationId": "createReport",
+    "summary": ""
+  },
+  {
+    "path": "/reports/{id}",
+    "method": "GET",
+    "operationId": "getReport",
+    "summary": ""
+  },
+  {
+    "path": "/integrations",
+    "method": "GET",
+    "operationId": "listIntegrations",
+    "summary": ""
+  },
+  {
+    "path": "/integrations",
+    "method": "POST",
+    "operationId": "createIntegration",
+    "summary": ""
+  },
+  {
+    "path": "/integrations/{id}",
+    "method": "GET",
+    "operationId": "getIntegration",
+    "summary": ""
+  },
+  {
+    "path": "/applications/{id}/submit",
+    "method": "POST",
+    "operationId": "submitApplication",
+    "summary": ""
+  },
+  {
+    "path": "/applications/{id}/withdraw",
+    "method": "POST",
+    "operationId": "withdrawApplication",
+    "summary": ""
+  },
+  {
+    "path": "/applications/{id}/request-information",
+    "method": "POST",
+    "operationId": "requestApplicationInformation",
+    "summary": ""
+  },
+  {
+    "path": "/applications/{id}/respond-information",
+    "method": "POST",
+    "operationId": "respondApplicationInformation",
+    "summary": ""
+  },
+  {
+    "path": "/cases/{id}/assign",
+    "method": "POST",
+    "operationId": "assignCase",
+    "summary": ""
+  },
+  {
+    "path": "/cases/{id}/complete-review",
+    "method": "POST",
+    "operationId": "completeCaseReview",
+    "summary": ""
+  },
+  {
+    "path": "/cases/{id}/decisions",
+    "method": "POST",
+    "operationId": "createRegulatoryDecision",
+    "summary": ""
+  },
+  {
+    "path": "/registrations/{id}/renew",
+    "method": "POST",
+    "operationId": "renewRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/registrations/{id}/vary",
+    "method": "POST",
+    "operationId": "varyRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/registrations/{id}/suspend",
+    "method": "POST",
+    "operationId": "suspendRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/registrations/{id}/revoke",
+    "method": "POST",
+    "operationId": "revokeRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/licenses/{id}/renew",
+    "method": "POST",
+    "operationId": "renewLicense",
+    "summary": ""
+  },
+  {
+    "path": "/licenses/{id}/amend",
+    "method": "POST",
+    "operationId": "amendLicense",
+    "summary": ""
+  },
+  {
+    "path": "/licenses/{id}/suspend",
+    "method": "POST",
+    "operationId": "suspendLicense",
+    "summary": ""
+  },
+  {
+    "path": "/licenses/{id}/restore",
+    "method": "POST",
+    "operationId": "restoreLicense",
+    "summary": ""
+  },
+  {
+    "path": "/licenses/{id}/revoke",
+    "method": "POST",
+    "operationId": "revokeLicense",
+    "summary": ""
+  },
+  {
+    "path": "/certificates/{id}/revoke",
+    "method": "POST",
+    "operationId": "revokeCertificate",
+    "summary": ""
+  },
+  {
+    "path": "/facilities/{id}/establishment-applications",
+    "method": "POST",
+    "operationId": "createFacilityEstablishmentApplication",
+    "summary": ""
+  },
+  {
+    "path": "/facilities/{id}/production-lines",
+    "method": "POST",
+    "operationId": "createFacilityProductionLine",
+    "summary": ""
+  },
+  {
+    "path": "/facilities/{id}/gmp-assessments",
+    "method": "POST",
+    "operationId": "createGmpAssessment",
+    "summary": ""
+  },
+  {
+    "path": "/products/{id}/versions",
+    "method": "POST",
+    "operationId": "createProductVersion",
+    "summary": ""
+  },
+  {
+    "path": "/products/{id}/packages",
+    "method": "POST",
+    "operationId": "createProductPackage",
+    "summary": ""
+  },
+  {
+    "path": "/products/{id}/registration-applications",
+    "method": "POST",
+    "operationId": "createProductRegistrationApplication",
+    "summary": ""
+  },
+  {
+    "path": "/products/{id}/batches",
+    "method": "POST",
+    "operationId": "createProductBatch",
+    "summary": ""
+  },
+  {
+    "path": "/feed/{id}/formulas",
+    "method": "POST",
+    "operationId": "createFeedFormula",
+    "summary": ""
+  },
+  {
+    "path": "/inspections/{id}/assign",
+    "method": "POST",
+    "operationId": "assignInspection",
+    "summary": ""
+  },
+  {
+    "path": "/inspections/{id}/visits",
+    "method": "POST",
+    "operationId": "createInspectionVisit",
+    "summary": ""
+  },
+  {
+    "path": "/inspections/{id}/findings",
+    "method": "POST",
+    "operationId": "createInspectionFinding",
+    "summary": ""
+  },
+  {
+    "path": "/inspections/{id}/complete",
+    "method": "POST",
+    "operationId": "completeInspection",
+    "summary": ""
+  },
+  {
+    "path": "/capa/{id}/submit",
+    "method": "POST",
+    "operationId": "submitCapa",
+    "summary": ""
+  },
+  {
+    "path": "/capa/{id}/verify",
+    "method": "POST",
+    "operationId": "verifyCapa",
+    "summary": ""
+  },
+  {
+    "path": "/enforcement-cases/{id}/actions",
+    "method": "POST",
+    "operationId": "createEnforcementAction",
+    "summary": ""
+  },
+  {
+    "path": "/enforcement-cases/{id}/appeals",
+    "method": "POST",
+    "operationId": "createEnforcementAppeal",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/samples/{id}/custody-events",
+    "method": "POST",
+    "operationId": "createSampleCustodyEvent",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/results/{id}/validate",
+    "method": "POST",
+    "operationId": "validateLaboratoryResult",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/results/{id}/approve",
+    "method": "POST",
+    "operationId": "approveLaboratoryResult",
+    "summary": ""
+  },
+  {
+    "path": "/laboratory/results/{id}/amend",
+    "method": "POST",
+    "operationId": "amendLaboratoryResult",
+    "summary": ""
+  },
+  {
+    "path": "/movements/{id}/authorize",
+    "method": "POST",
+    "operationId": "authorizeMovement",
+    "summary": ""
+  },
+  {
+    "path": "/movements/{id}/depart",
+    "method": "POST",
+    "operationId": "departMovement",
+    "summary": ""
+  },
+  {
+    "path": "/movements/{id}/arrive",
+    "method": "POST",
+    "operationId": "arriveMovement",
+    "summary": ""
+  },
+  {
+    "path": "/movements/{id}/complete",
+    "method": "POST",
+    "operationId": "completeMovement",
+    "summary": ""
+  },
+  {
+    "path": "/disease-cases/{id}/investigations",
+    "method": "POST",
+    "operationId": "createDiseaseInvestigation",
+    "summary": ""
+  },
+  {
+    "path": "/disease-cases/{id}/samples",
+    "method": "POST",
+    "operationId": "createDiseaseSample",
+    "summary": ""
+  },
+  {
+    "path": "/disease-cases/{id}/confirm",
+    "method": "POST",
+    "operationId": "confirmDiseaseCase",
+    "summary": ""
+  },
+  {
+    "path": "/outbreaks/{id}/zones",
+    "method": "POST",
+    "operationId": "createOutbreakZone",
+    "summary": ""
+  },
+  {
+    "path": "/outbreaks/{id}/control-measures",
+    "method": "POST",
+    "operationId": "createOutbreakControlMeasure",
+    "summary": ""
+  },
+  {
+    "path": "/outbreaks/{id}/close",
+    "method": "POST",
+    "operationId": "closeOutbreak",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}/declare",
+    "method": "POST",
+    "operationId": "declareShipment",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}/risk-assess",
+    "method": "POST",
+    "operationId": "riskAssessShipment",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}/inspection",
+    "method": "POST",
+    "operationId": "requestShipmentInspection",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}/quarantine",
+    "method": "POST",
+    "operationId": "startShipmentQuarantine",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}/clearance",
+    "method": "POST",
+    "operationId": "decideShipmentClearance",
+    "summary": ""
+  },
+  {
+    "path": "/trade/shipments/{id}/certificates",
+    "method": "POST",
+    "operationId": "issueShipmentCertificate",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/stock-batches/{id}/production",
+    "method": "POST",
+    "operationId": "recordAquacultureProduction",
+    "summary": ""
+  },
+  {
+    "path": "/aquaculture/stock-batches/{id}/harvest",
+    "method": "POST",
+    "operationId": "recordAquacultureHarvest",
+    "summary": ""
+  },
+  {
+    "path": "/certificates/verify/{token}",
+    "method": "GET",
+    "operationId": "verifyCertificate",
+    "summary": ""
+  },
+  {
+    "path": "/health",
+    "method": "GET",
+    "operationId": "healthCheck",
+    "summary": ""
+  },
+  {
+    "path": "/ready",
+    "method": "GET",
+    "operationId": "readinessCheck",
+    "summary": ""
+  },
+  {
+    "path": "/drug-registrations",
+    "method": "GET",
+    "operationId": "listDrugRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/drug-registrations",
+    "method": "POST",
+    "operationId": "createDrugRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/drug-registrations/{id}",
+    "method": "GET",
+    "operationId": "getDrugRegistration",
+    "summary": ""
+  },
+  {
+    "path": "/veterinary-devices",
+    "method": "GET",
+    "operationId": "listVeterinaryDevice",
+    "summary": ""
+  },
+  {
+    "path": "/veterinary-devices",
+    "method": "POST",
+    "operationId": "createVeterinaryDevice",
+    "summary": ""
+  },
+  {
+    "path": "/veterinary-devices/{id}",
+    "method": "GET",
+    "operationId": "getVeterinaryDevice",
+    "summary": ""
+  },
+  {
+    "path": "/import-plans",
+    "method": "GET",
+    "operationId": "listImportPlan",
+    "summary": ""
+  },
+  {
+    "path": "/import-plans",
+    "method": "POST",
+    "operationId": "createImportPlan",
+    "summary": ""
+  },
+  {
+    "path": "/import-plans/{id}",
+    "method": "GET",
+    "operationId": "getImportPlan",
+    "summary": ""
+  },
+  {
+    "path": "/import-plan-items",
+    "method": "GET",
+    "operationId": "listImportPlanItem",
+    "summary": ""
+  },
+  {
+    "path": "/import-plan-items",
+    "method": "POST",
+    "operationId": "createImportPlanItem",
+    "summary": ""
+  },
+  {
+    "path": "/import-plan-items/{id}",
+    "method": "GET",
+    "operationId": "getImportPlanItem",
+    "summary": ""
+  },
+  {
+    "path": "/import-applications",
+    "method": "GET",
+    "operationId": "listImportApplication",
+    "summary": ""
+  },
+  {
+    "path": "/import-applications",
+    "method": "POST",
+    "operationId": "createImportApplication",
+    "summary": ""
+  },
+  {
+    "path": "/import-applications/{id}",
+    "method": "GET",
+    "operationId": "getImportApplication",
+    "summary": ""
+  },
+  {
+    "path": "/import-application-items",
+    "method": "GET",
+    "operationId": "listImportApplicationItem",
+    "summary": ""
+  },
+  {
+    "path": "/import-application-items",
+    "method": "POST",
+    "operationId": "createImportApplicationItem",
+    "summary": ""
+  },
+  {
+    "path": "/import-application-items/{id}",
+    "method": "GET",
+    "operationId": "getImportApplicationItem",
+    "summary": ""
+  },
+  {
+    "path": "/veterinary-drug-reference-data",
+    "method": "GET",
+    "operationId": "getVeterinaryDrugReferenceData",
+    "summary": "Veterinary drug controlled reference data"
+  },
+  {
+    "path": "/drug-registrations/next-number",
+    "method": "GET",
+    "operationId": "previewDrugRegistrationNumber",
+    "summary": "Preview next veterinary drug registration number"
+  }
+]
