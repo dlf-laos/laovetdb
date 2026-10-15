@@ -22,7 +22,7 @@ Source ໃໝ່ແມ່ນ TypeScript monorepo ທີ່ສືບຕໍ່ LVS
 
 ການເຊື່ອມ ChatGPT/Codex ກັບ Vercel/GitHub/Neon ເປັນສິດເຄື່ອງມືພັດທະນາ; ບໍ່ແມ່ນການເລືອກ model ວິເຄາະ dossier ໃນ LVSP.
 
-Gemini key ທີ່ບັນທຶກໄວ້ຍັງມີສະເພາະ Production. ການໃຫ້ Preview ໃຊ້ key ນີ້ຍັງລໍຖ້າຄຳຢືນຢັນຈາກເຈົ້າຂອງ. ຍັງຕ້ອງກຳນົດ model ແລະ ທົດສອບການເອີ້ນ Gemini ຈິງ. AI ຍັງບໍ່ພ້ອມໃຊ້ໃນ Preview.
+ເຈົ້າຂອງອະນຸຍາດແລ້ວ: Gemini key ໃນ Vercel ຕັ້ງໃຫ້ໃຊ້ໄດ້ທັງ Production ແລະ Preview ໂດຍບໍ່ໃສ່ key ໃນ Source Code. Preview ກຳນົດ model `gemini-3.8-flash`; ຍັງຕ້ອງທົດສອບການເອີ້ນ Gemini ຈິງ ເພື່ອຢືນຢັນສິດໃຊ້ model/quota ຂອງບັນຊີ. ຍັງບໍ່ໄດ້ຢືນຢັນ AI ແບບ end-to-end.
 
 ## ກ່ອນປ່ຽນເວັບຫຼັກ
 

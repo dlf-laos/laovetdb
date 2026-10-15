@@ -180,7 +180,7 @@
   "release_candidate": {
     "source": "LVSP_V17_ONLINE_AUTH + preserved Phase2 source",
     "department_scope": "Veterinary Services Division; additional divisions require later approval",
-    "publish_status": "protected Vercel Preview deployed; production unchanged; GitHub push pending",
+    "publish_status": "GitHub source updated; protected Vercel Preview deployed; production unchanged",
     "local_data_incident": "Initial legacy test run reset the original ONLINE_AUTH runtime local JSON; previous contents could not be established. Neon was not modified. All subsequent tests use isolated files."
   },
   "document_intake_pilot": {
@@ -214,7 +214,8 @@
       "storageMode": "neon-s3",
       "productionDataCopied": false,
       "liveSyntheticStorageFlow": "upload/download/anonymous-denial passed",
-      "geminiSecretScopeApproval": "pending"
+      "geminiSecretScopeApproval": "approved_by_owner_and_configured_production_and_preview",
+      "aiModel": "gemini-3.8-flash"
     }
   }
 }

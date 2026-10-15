@@ -1,6 +1,6 @@
 # LVSP — ສະຖານະວຽກຮັບເອກະສານ / AI
 
-ອັບເດດລ່າສຸດ: Preview ຂຶ້ນ Vercel ແລ້ວ; private Neon storage ທົດສອບຈິງຜ່ານ (ໄຟລ໌ຈຳລອງ), 117 tests ຜ່ານ. Gemini ໃນ Preview ຍັງລໍຖ້າອະນຸຍາດໃຊ້ key. ເບິ່ງ [ບັນທຶກການຂຶ້ນ Preview](VERCEL_PREVIEW_STATUS_20261015.md). ລາຍລະອຽດດ້ານລຸ່ມແມ່ນຜົນກວດກ່ອນເປີດ Neon storage; production ຍັງບໍ່ໄດ້ປ່ຽນ.
+ອັບເດດລ່າສຸດ: Preview ຂຶ້ນ Vercel ແລ້ວ; private Neon storage ທົດສອບຈິງຜ່ານ (ໄຟລ໌ຈຳລອງ), 117 tests ຜ່ານ. Gemini key ໃນ Preview ໄດ້ຮັບອະນຸຍາດ ແລະ ຕັ້ງຄ່າແລ້ວ; model ຕັ້ງເປັນ gemini-3.8-flash; live AI verification ຍັງລໍຖ້າ. ເບິ່ງ [ບັນທຶກການຂຶ້ນ Preview](VERCEL_PREVIEW_STATUS_20261015.md). ລາຍລະອຽດດ້ານລຸ່ມແມ່ນຜົນກວດກ່ອນເປີດ Neon storage; production ຍັງບໍ່ໄດ້ປ່ຽນ.
 
 ## ສ່ວນທີ່ໄດ້ພັດທະນາໃນໂຄງການເດີມ
 

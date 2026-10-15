@@ -35,3 +35,19 @@ Storage settings were added to Preview only. GEMINI_API_KEY remains Production-o
 ## Latest storage-enabled Preview
 
 Source checkpoint `14ea1f0`; 117 isolated regression tests passed. Vercel deployment `dpl_76Ge2h5fjdfY2KzRKnTtzsV3SC6B` is READY at https://lvsp-laos-m8cxiyube-veterinary-srvices-division.vercel.app. This supersedes the earlier Preview URL above. Production was not promoted. Google DNS-over-HTTPS resolves the Preview hostname; the computer's ordinary resolver timed out. End-to-end public HTTP verification remains pending.
+
+## Admin entry and GitHub continuation — 16 October 2026
+
+Local checkpoint `d41a631` builds successfully and adds the current Admin Center entry at `/admin.html`, preserves module selection after login, and refreshes the shell cache/footer. Deployed as READY Preview `dpl_3e8SWjynk11Y2BCduJnXgZiraPJt`: https://lvsp-laos-4todul8l1-veterinary-srvices-division.vercel.app.
+
+Uploaded the continuation source to the existing public GitHub repository on branch `lvsp-modernization-20261016`, commit `37cc547fcca260ab58dfd01eac9ca43ac13c3293`. Draft PR: https://github.com/dlf-laos/laovetdb/pull/1. The old root index remains in main and in the proposal. Source upload excluded secret/runtime files and the internal budget preview screenshot. The two spreadsheet templates and emblem/decorative JPEGs were inspected before their public upload.
+
+Production still uses the October 7 legacy deployment; its replacement remains pending production data reconciliation/backup, environment preparation, and browser verification. Gemini key scope remains Production-only and no model has been configured for Preview.
+
+GitHub Actions run https://github.com/dlf-laos/laovetdb/actions/runs/38782506743 completed successfully: dependency installation, `npm run preflight` (including package/YAML validation and regression suite), and `npm run build:vercel`. A deployed `/admin.html` verification attempt timed out in local DNS resolution; no browser success is claimed.
+
+## Gemini Preview scope approved — 16 October 2026
+
+The owner explicitly approved using the existing Vercel Gemini key in Preview. Its targets were changed through the documented Vercel metadata API to `[production, preview]`, preserving the value and Production target. No plaintext secret was requested or displayed. A new Preview deployment is required to consume the updated settings. Model selection and a live Gemini request remain pending; key configuration alone does not establish operational AI.
+
+Selected `LVSP_AI_MODEL=gemini-3.8-flash` in Preview, based on the current official stable-model documentation: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash. Account-specific model availability/quota and a live extraction request remain unverified. No dossier or Gemini request was sent during configuration.
