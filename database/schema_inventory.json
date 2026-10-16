@@ -1,6 +1,6 @@
 {
-  "generated_from_migrations": 115,
-  "full_schema_sha256": "a1cea03bb4c283df6e4ff23af71e0af29f036c6c180292eba2045f97567215aa",
+  "generated_from_migrations": 116,
+  "full_schema_sha256": "8418729194ac3c2ccd71c37632ad95da1cea71ca6b9d40b14c1fa48bba59ee42",
   "tables": [
     {
       "name": "system.schema_migration",
@@ -1065,6 +1065,10 @@
     {
       "name": "document.intake_attachment",
       "migration": "000940_document_intake_pilot.sql"
+    },
+    {
+      "name": "analytics.amu_movement",
+      "migration": "000950_amu_actual_movement_ledger.sql"
     }
   ]
 }

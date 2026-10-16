@@ -161,6 +161,10 @@
 
 - 000940_document_intake_pilot.sql
 
+## Actual antimicrobial movement ledger
+
+- 000950_amu_actual_movement_ledger.sql
+
 ## Migration policy
 
 Applied migrations are immutable. Corrections are new migrations. Official/legal records use `ON DELETE RESTRICT` by default. `CASCADE` is limited to truly dependent configuration/junction records.

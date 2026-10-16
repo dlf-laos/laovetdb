@@ -7,6 +7,7 @@ export async function amuBody(req){let n=0;const chunks=[];for await(const chunk
 export async function handleAmuApi({req,res,url,store,ids,principal}){
  if(!url.pathname.startsWith('/api/v1/animuse/ledger'))return false;
  if(!principal.isAuthenticated)fail('UNAUTHENTICATED','Authentication required',401);
+ if(!(principal.roles||[]).some(r=>['SYSTEM_ADMIN','SECURITY_ADMIN','DATA_STEWARD','REGISTRY_OFFICER','BORDER_OFFICER','CHECKPOINT_SUPERVISOR','TECHNICAL_REVIEWER','APPROVING_AUTHORITY'].includes(r)))fail('FORBIDDEN','Staff role required for antimicrobial trade records',403);
  if(principal.mustChangePassword)fail('PASSWORD_CHANGE_REQUIRED','Change password first',403);
  if(store.mode!=='postgres')fail('POSTGRES_REQUIRED','ANIMUSE requires PostgreSQL',501);
  const path=url.pathname.slice('/api/v1/animuse/ledger'.length),reply=(data,status=200)=>{sendJson(res,status,{data,meta:{requestId:ids.requestId}},ids);return true};

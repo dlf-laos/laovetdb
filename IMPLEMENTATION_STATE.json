@@ -1,7 +1,7 @@
 {
   "project": "LVSP",
   "version": "1.12.0-release-candidate.1",
-  "updated_at": "2026-10-15",
+  "updated_at": "2026-10-16",
   "implementation_level": "Local and disposable PostgreSQL release candidate; production deployment and departmental scope approval pending",
   "baseline": {
     "blueprint": "enterprise baseline complete",
@@ -217,5 +217,16 @@
       "geminiSecretScopeApproval": "approved_by_owner_and_configured_production_and_preview",
       "aiModel": "gemini-3.8-flash"
     }
+  },
+  "v31_amu_continuation": {
+    "status": "implemented_and_tested_in_isolated_preview",
+    "regression_tests_passed": 134,
+    "migration": "000950_amu_actual_movement_ledger.sql",
+    "scope": "Two existing workspaces retained; actual movement ledger, exact presentation links, unregistered declarations, evidence, review and audit.",
+    "limits": [
+      "Historical browser data reconciliation pending",
+      "Official WOAH template mapping and national stock/source reconciliation pending",
+      "Production migration and publication of this version not performed"
+    ]
   }
 }
