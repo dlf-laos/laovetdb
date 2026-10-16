@@ -1,3 +1,4 @@
+import {handleAmuApi} from './core/amu-api.js';
 // LVSP zero-dependency executable API for development and UAT scaffolding.
 // PostgreSQL remains the authoritative production database specification.
 // @ts-nocheck
@@ -99,6 +100,7 @@ const server=http.createServer(async(req,res)=>{
       const auth=authorize(getPrincipal(req),req.method||'GET',apiPath);
       if(!auth.ok)return sendJson(res,auth.code==='UNAUTHENTICATED'?401:403,failure(auth.code,auth.code==='UNAUTHENTICATED'?'Authentication required':'Insufficient permission',ids),ids);
     }
+    if(await handleAmuApi({req,res,url,store,ids,principal:getPrincipal(req)}))return;
     if(await handleDocumentIntakeApi({req,res,url,store,ids,principal:getPrincipal(req)}))return;
     if(await handleDepartmentOperationsApi({req,res,url,store,ids,principal:getPrincipal(req)}))return;
     if(url.pathname==='/openapi.yaml') return staticFile(res,openapiFile);
@@ -558,7 +560,7 @@ const server=http.createServer(async(req,res)=>{
         const ar=await client.query('select * from trade.import_plan_profile where import_plan_id=$1',[planId]);after=ar.rows[0];
         await client.query('commit');
       }catch(e){try{await client.query('rollback')}catch{}throw e}finally{client.release()}
-      await store.audit({actorUserId:principal.userId,actionCode:'annual_trade_plan.profile.update',resourceType:'import_plan',resourceId:planId,correlationId:ids.correlationId,beforeData:before,afterData:after});
+      await store.audit({actorUserId:getPrincipal(req).userId,actionCode:'annual_trade_plan.profile.update',resourceType:'import_plan',resourceId:planId,correlationId:ids.correlationId,beforeData:before,afterData:after});
       return sendJson(res,200,{data:after,meta:{requestId:ids.requestId}},ids);
     }
 

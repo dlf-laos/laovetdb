@@ -1,4 +1,6 @@
+import {renderAmuWorkspace} from './amu-workspace.js';
 import {renderDocumentIntake} from './document-intake.js';
+import {probeConnection} from './connection-status.js';
 import {renderDepartmentOperations} from './department-operations.js';
 import { openVetDrugOperationalWorkspace } from './vet-drug-operational.js';
 import { openRegistrationBatchMemo, renderRegistrationMemoCenter, openTradeCoordinationSheet, openRegulatoryReportBuilder, renderRegulatoryReportsPage, openImportPlanAnalyticsDashboard, openModuleReportForKey, moduleReportAvailable } from './legacy-parity.js';
@@ -86,11 +88,15 @@ function restoreTemporaryWorkspace(reload=false){if(!temporaryWorkspaceReturnKey
 async function openWorkspaceCreate(moduleKey:string){const m=moduleByKey(moduleKey);if(!m)return toast('Workspace module not found',true);temporaryWorkspaceReturnKey=current.key;current=m;try{await openCreate()}catch(e:any){restoreTemporaryWorkspace(false);toast(e.message,true)}}
 async function openWorkspaceBulk(kind:'plan'|'application'){const key=kind==='plan'?'import_plans':'import_applications',m=moduleByKey(key);if(!m)return toast('Bulk module not found',true);temporaryWorkspaceReturnKey=current.key;current=m;try{await openBulk()}catch(e:any){restoreTemporaryWorkspace(false);toast(e.message,true)}}
 
+let expandedNavigation=false;
+const divisionNavigation=['drug_registrations','trade_workspace','document_intake','regulatory_reports','companies','products','my_work','department_operations','admin_center'];
 function renderNav(){
- const visible=(!authenticated()&&publicBrowsing)
+ let visible=(!authenticated()&&publicBrowsing)
    ? modules.filter(m=>m.key==='guided_services')
    : modules.filter(m=>!m.navHidden&&(m.key!=='admin_center'||isAdminClient()));
- $('#nav').innerHTML=visible.map(m=>`<button class="nav-item ${m.key===current.key?'active':''} ${m.priority?'priority':''}" data-key="${m.key}"><span>${m.icon}</span><span>${esc(t(m))}</span></button>`).join('');
+ if(authenticated()&&!expandedNavigation)visible=divisionNavigation.map(key=>visible.find(m=>m.key===key)).filter(Boolean) as ModuleDef[];
+ $('#nav').innerHTML=visible.map(m=>`<button class="nav-item ${m.key===current.key?'active':''} ${m.priority?'priority':''}" data-key="${m.key}"><span>${m.icon}</span><span>${esc(t(m))}</span></button>`).join('')+(authenticated()?`<button id="nav-expand" class="ghost">${expandedNavigation?(lang==='lo'?'ກັບສູ່ວຽກຫຼັກ':'Main workspaces'):(lang==='lo'?'ເບິ່ງໜ້າວຽກອື່ນ':'Other modules')}</button>`:'');
+ $('#nav-expand')?.addEventListener('click',()=>{expandedNavigation=!expandedNavigation;renderNav()});
  $('#logout-btn').textContent=authenticated()?'Logout':'Login';
  document.querySelectorAll('.nav-item').forEach(el=>el.addEventListener('click',()=>{current=modules.find(x=>x.key===(el as HTMLElement).dataset.key)!;renderNav();loadModule();}));
 }
@@ -100,7 +106,7 @@ async function loadStats(){
   const r=await api('/meta'); const c=r.data.counts||{};
   const stats=[['ຄຳຂໍນຳເຂົ້າ','Import Apps',c.import_applications||0,'📝'],['ທະບຽນຢາ','Drug Reg.',c.drug_registrations||0,'💊'],['ອຸປະກອນ','Devices',c.veterinary_devices||0,'🩺'],['ແຜນປະຈຳປີ','Annual Plans',c.import_plans||0,'📅'],['ບໍລິສັດ','Companies',c.companies||0,'🏢']];
   $('#stats').innerHTML=stats.map(x=>`<div class="stat-card"><div class="stat-icon">${x[3]}</div><div><strong>${x[2]}</strong><span>${lang==='lo'?x[0]:x[1]}</span></div></div>`).join('');
-  $('#storage-mode').textContent=`${r.data.storageMode||''} / ${r.data.authMode||''}`; const sl=$('#side-storage-label'); if(sl)sl.textContent=r.data.storageMode==='postgres'?'Neon PostgreSQL Staging':'Local Development Mode';
+  showStorageMode(r.data.storageMode);
  }catch(e){console.error(e)}
 }
 
@@ -131,7 +137,7 @@ async function loadModule(){
  if(current.key==='regulatory_reports'){showCustomPage(true);return renderRegulatoryReportsPage();}
  showCustomPage(false);
  configureBulkToolbar();
- if(current.key==='animuse')return loadAnimuse();
+ if(current.key==='animuse'){showCustomPage(true);return renderAmuWorkspace({root:$('#custom-page'),lang,api});}
  $('#page-title').textContent=t(current); $('#page-subtitle').textContent=current.priority?(lang==='lo'?'Priority Veterinary Products • ຂໍ້ມູນຈາກ Neon PostgreSQL':'Priority Veterinary Products • Neon PostgreSQL'):(lang==='lo'?'ຂໍ້ມູນຈາກ LVSP API':'Data from LVSP API');
  $('#table-body').innerHTML=`<tr><td colspan="${current.fields.length+1}" class="empty">Loading…</td></tr>`;
  try{const r=await api(current.path);const rows=r.data||[];$('#record-count').textContent=`${r.meta?.total??rows.length} ${lang==='lo'?'ລາຍການ':'records'}`;renderRows(rows);}catch(e:any){$('#table-body').innerHTML=`<tr><td colspan="${current.fields.length+1}" class="error">${esc(e.message)}</td></tr>`;}
@@ -172,7 +178,21 @@ function settingValue(x:any){const v=x?.valueJson;return v===undefined||v===null
 async function loadPublicSettings(){
  try{const r=await apiPublic('/public/platform-settings');const settings=r.data||[];platformPublicSettings=Object.fromEntries(settings.map((x:any)=>[x.settingCode,settingValue(x)]));renderNav();const banner=settings.find((x:any)=>x.settingCode==='MAINTENANCE_BANNER');const text=String(settingValue(banner)||'').trim();const el=$('#maintenance-banner');if(el){el.textContent=text;el.classList.toggle('hidden',!text)}const field=settings.find((x:any)=>x.settingCode==='FIELD_PWA_ENABLED');const link=$('#field-app-link');if(link&&field)link.classList.toggle('hidden',settingValue(field)===false);}catch{}
 }
-function updateNetworkState(){const el=$('#network-state');if(!el)return;const on=navigator.onLine;el.textContent=on?(lang==='lo'?'Online':'Online'):(lang==='lo'?'Offline':'Offline');el.classList.toggle('online',on);el.classList.toggle('offline',!on);}
+function showStorageMode(mode:string){
+ const label=mode==='postgres'?(lang==='lo'?'ຖານຂໍ້ມູນກາງ':'Central database'):(lang==='lo'?'ຂໍ້ມູນໃນເຄື່ອງ':'Local data');
+ $('#storage-mode').textContent=label;$('#side-storage-label').textContent=label;
+}
+let connectionCheck=0;
+async function updateNetworkState(){
+ const el=$('#network-state');if(!el)return;const check=++connectionCheck;
+ el.textContent=lang==='lo'?'ກຳລັງກວດການເຊື່ອມຕໍ່…':'Checking connection…';
+ const result=await probeConnection(navigator.onLine);if(check!==connectionCheck)return;
+ const connected=result.state==='connected';
+ el.textContent=connected?(lang==='lo'?'ເຊື່ອມຕໍ່ແລ້ວ':'Connected'):result.state==='offline'?(lang==='lo'?'ອອບລາຍ':'Offline'):(lang==='lo'?'ຕິດຕໍ່ລະບົບບໍ່ໄດ້':'Server unavailable');
+ el.classList.toggle('online',connected);el.classList.toggle('offline',!connected);
+ $('#connection-retry')?.classList.toggle('hidden',connected);
+ if(connected&&result.storage)showStorageMode(result.storage);
+}
 function initPwa(){
  updateNetworkState();window.addEventListener('online',updateNetworkState);window.addEventListener('offline',updateNetworkState);
  window.addEventListener('beforeinstallprompt',(e:any)=>{e.preventDefault();deferredInstallPrompt=e;$('#install-btn')?.classList.remove('hidden')});
@@ -672,7 +692,7 @@ async function initAuth(){
  }catch{localStorage.removeItem(tokenKey);currentUserRoles=[];currentUserMustChangePassword=false;publicBrowsing=true;await renderPublicOverview();}
 }
 function bind(){
- $('#install-btn').addEventListener('click',()=>installPwa()); $('#update-btn').addEventListener('click',()=>applyPwaUpdate());
+ $('#connection-retry')?.addEventListener('click',()=>void updateNetworkState()); $('#install-btn').addEventListener('click',()=>installPwa()); $('#update-btn').addEventListener('click',()=>applyPwaUpdate());
  $('#create-btn').addEventListener('click',()=>{editingDrugId=null;editingCompanyId=null;companySiteContext=null;companyRegistrationCompanyId=null;openCreate()}); $('#bulk-btn').addEventListener('click',()=>openBulk()); $('#bulk-close').addEventListener('click',()=>{($('#bulk-modal') as HTMLDialogElement).close();restoreTemporaryWorkspace(false)}); $('#bulk-preview').addEventListener('click',()=>previewBulk()); $('#bulk-commit').addEventListener('click',()=>commitBulk()); $('#create-form').addEventListener('submit',submitForm as any); $('#cancel-btn').addEventListener('click',()=>{editingDrugId=null;editingCompanyId=null;companySiteContext=null;companyRegistrationCompanyId=null;($('#create-modal') as HTMLDialogElement).close();restoreTemporaryWorkspace(true)}); $('#detail-close').addEventListener('click',closeDetail);
  $('#lang-btn').addEventListener('click',()=>{lang=lang==='lo'?'en':'lo';$('#lang-btn').textContent=lang==='lo'?'EN':'ລາວ';renderNav();if(publicBrowsing&&!authenticated())renderPublicOverview();else loadModule();if(authenticated())loadStats();}); $('#login-form').addEventListener('submit',login as any); $('#password-form').addEventListener('submit',changePassword as any); $('#browse-services-btn').addEventListener('click',()=>{publicBrowsing=true;pendingServiceCode=null;($('#login-modal') as HTMLDialogElement).close();current=modules.find(x=>x.key==='guided_services')!;renderNav();loadModule();}); $('#browse-public-btn').addEventListener('click',()=>{($('#login-modal') as HTMLDialogElement).close();renderPublicOverview();}); $('#logout-btn').addEventListener('click',()=>{localStorage.removeItem(tokenKey);currentUserRoles=[];currentUserMustChangePassword=false;publicBrowsing=true;renderPublicOverview();showLogin();});
  ($('#search') as HTMLInputElement).addEventListener('input',async e=>{if(['animuse','guided_services','my_work','provincial_reporting','admin_center'].includes(current.key))return;const q=(e.target as HTMLInputElement).value;try{const r=await api(current.path+'?q='+encodeURIComponent(q));renderRows(r.data||[]);}catch{}});

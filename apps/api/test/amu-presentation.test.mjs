@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {presentationToAmu} from '../../web/public/amu-presentation.js';
+test('registry bridge converts explicit structured presentation, without guessing clearance counts',()=>{const r=presentationToAmu({packSize:0.1,packUnit:'l',basisText:'1 ml',composition:[{name:'Example',quantity:'0.1',unit:'g'}]});assert.equal(r.packSize,100);assert.equal(r.components[0].strength,100);assert.equal(r.components[0].mode,'mg/ml');assert.equal(r.packCount,'');assert.equal(r.components[0].evidence,'');});
+test('ambiguous packs, missing basis and free-text strengths remain unresolved',()=>{const r=presentationToAmu({packSizeText:'box of 12 x 100ml',composition:[{name:'Example',quantity:'10%',unit:'%'}]});assert.equal(r.packSize,'');assert.equal(r.components[0].strength,'');});

@@ -40,7 +40,20 @@ function isUuid(v:any){return typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[1-
 
 export class PostgresStore {
   mode='postgres'; pool:any; columns=new Map();
-  static async create(connectionString:string){const mod:any=await import('pg');const pool=new mod.Pool({connectionString,max:Number(process.env.DB_POOL_MAX||10),application_name:'lvsp-api'});await pool.query('select 1');return new PostgresStore(pool)}
+  static async create(connectionString:string){
+    const transport=process.env.LVSP_PG_TRANSPORT||'tcp';
+    if(!['tcp','neon-ws'].includes(transport))throw new Error('Unsupported LVSP_PG_TRANSPORT');
+    let mod:any;
+    if(transport==='neon-ws'){
+      const url=new URL(connectionString);
+      if(!url.hostname.endsWith('.neon.tech'))throw new Error('neon-ws requires a Neon database hostname');
+      mod=await import('@neondatabase/serverless');
+      mod.neonConfig.webSocketConstructor=WebSocket;
+    }else mod=await import('pg');
+    const pool=new mod.Pool({connectionString,max:Number(process.env.DB_POOL_MAX||10),application_name:'lvsp-api',connectionTimeoutMillis:10000});
+    pool.on('error',(error:any)=>console.error('LVSP idle database connection error:',error.code||'CONNECTION_ERROR'));
+    try{await pool.query('select 1');return new PostgresStore(pool)}catch(error){await pool.end().catch(()=>{});throw error}
+  }
   constructor(pool:any){this.pool=pool}
   info(resource:string){const i=TABLES[resource];if(!i)throw Object.assign(new Error(`PostgreSQL mapping not configured for ${resource}`),{statusCode:501,code:'POSTGRES_MAPPING_MISSING'});return {...i,pk:i.pk||'id'}}
   async getColumns(full:string){if(this.columns.has(full))return this.columns.get(full);const [schema,table]=full.split('.');const r=await this.pool.query('select column_name from information_schema.columns where table_schema=$1 and table_name=$2',[schema,table]);const set=new Set(r.rows.map((x:any)=>x.column_name));this.columns.set(full,set);return set}
