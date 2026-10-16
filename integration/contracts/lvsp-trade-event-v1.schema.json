@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:lvsp:trade:event:1",
+  "title": "LVSP canonical trade event v1 — internal contract, not an LNSW/WCO certified message",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "messageId", "correlationId", "eventType", "occurredAt", "sourceSystem", "destinationSystem", "reference", "payloadHash"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "messageId": {"type": "string", "format": "uuid"},
+    "correlationId": {"type": "string", "format": "uuid"},
+    "eventType": {"enum": ["PermitIssued", "PermitAmended", "PermitRevoked", "ClearanceRecorded", "ClearanceReversed"]},
+    "occurredAt": {"type": "string", "format": "date-time"},
+    "sourceSystem": {"type": "string", "minLength": 1, "maxLength": 80},
+    "destinationSystem": {"type": "string", "minLength": 1, "maxLength": 80},
+    "reference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["permitId", "documentVersion", "companyId", "serviceCode", "movementType"],
+      "properties": {
+        "permitId": {"type": "string", "format": "uuid"},
+        "documentVersion": {"type": "integer", "minimum": 1},
+        "outgoingNumber": {"type": "string", "minLength": 1},
+        "outgoingDate": {"type": "string", "format": "date"},
+        "companyId": {"type": "string", "format": "uuid"},
+        "serviceCode": {"type": "string", "minLength": 1},
+        "movementType": {"enum": ["IMPORT", "EXPORT", "RE_EXPORT", "TRANSIT"]},
+        "externalReference": {"type": "string", "maxLength": 255}
+      }
+    },
+    "items": {
+      "type": "array", "maxItems": 1000,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["itemId", "quantity", "unitCode"],
+        "properties": {
+          "itemId": {"type": "string", "format": "uuid"},
+          "planItemId": {"type": "string", "format": "uuid"},
+          "quantity": {"type": "string", "pattern": "^[0-9]{1,12}(\\.[0-9]{1,6})?$"},
+          "unitCode": {"type": "string", "minLength": 1, "maxLength": 30},
+          "hsCode": {"type": "string", "pattern": "^[0-9]{6,12}$"},
+          "hsEdition": {"type": "string", "minLength": 1},
+          "checkpointCode": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "payloadHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "$comment": "Use agreed canonicalization and signing rules, and an approved partner mapping before exchange. Configure explicit format validation in the eventual adapter. This schema is not deployed as an accepting external endpoint."
+}
