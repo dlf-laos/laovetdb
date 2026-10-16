@@ -9,6 +9,7 @@
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "1.2.0",
     "pg": "8.23.0"
   }
 }

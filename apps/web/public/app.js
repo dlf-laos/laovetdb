@@ -1,4 +1,6 @@
+import { renderAmuWorkspace } from './amu-workspace.js';
 import { renderDocumentIntake } from './document-intake.js';
+import { probeConnection } from './connection-status.js';
 import { renderDepartmentOperations } from './department-operations.js';
 import { openVetDrugOperationalWorkspace } from './vet-drug-operational.js';
 import { openRegistrationBatchMemo, renderRegistrationMemoCenter, openTradeCoordinationSheet, openRegulatoryReportBuilder, renderRegulatoryReportsPage, openImportPlanAnalyticsDashboard, openModuleReportForKey, moduleReportAvailable } from './legacy-parity.js';
@@ -112,11 +114,16 @@ catch (e) {
     restoreTemporaryWorkspace(false);
     toast(e.message, true);
 } }
+let expandedNavigation = false;
+const divisionNavigation = ['drug_registrations', 'trade_workspace', 'document_intake', 'regulatory_reports', 'companies', 'products', 'my_work', 'department_operations', 'admin_center'];
 function renderNav() {
-    const visible = (!authenticated() && publicBrowsing)
+    let visible = (!authenticated() && publicBrowsing)
         ? modules.filter(m => m.key === 'guided_services')
         : modules.filter(m => !m.navHidden && (m.key !== 'admin_center' || isAdminClient()));
-    $('#nav').innerHTML = visible.map(m => `<button class="nav-item ${m.key === current.key ? 'active' : ''} ${m.priority ? 'priority' : ''}" data-key="${m.key}"><span>${m.icon}</span><span>${esc(t(m))}</span></button>`).join('');
+    if (authenticated() && !expandedNavigation)
+        visible = divisionNavigation.map(key => visible.find(m => m.key === key)).filter(Boolean);
+    $('#nav').innerHTML = visible.map(m => `<button class="nav-item ${m.key === current.key ? 'active' : ''} ${m.priority ? 'priority' : ''}" data-key="${m.key}"><span>${m.icon}</span><span>${esc(t(m))}</span></button>`).join('') + (authenticated() ? `<button id="nav-expand" class="ghost">${expandedNavigation ? (lang === 'lo' ? 'ກັບສູ່ວຽກຫຼັກ' : 'Main workspaces') : (lang === 'lo' ? 'ເບິ່ງໜ້າວຽກອື່ນ' : 'Other modules')}</button>` : '');
+    $('#nav-expand')?.addEventListener('click', () => { expandedNavigation = !expandedNavigation; renderNav(); });
     $('#logout-btn').textContent = authenticated() ? 'Logout' : 'Login';
     document.querySelectorAll('.nav-item').forEach(el => el.addEventListener('click', () => { current = modules.find(x => x.key === el.dataset.key); renderNav(); loadModule(); }));
 }
@@ -126,10 +133,7 @@ async function loadStats() {
         const c = r.data.counts || {};
         const stats = [['ຄຳຂໍນຳເຂົ້າ', 'Import Apps', c.import_applications || 0, '📝'], ['ທະບຽນຢາ', 'Drug Reg.', c.drug_registrations || 0, '💊'], ['ອຸປະກອນ', 'Devices', c.veterinary_devices || 0, '🩺'], ['ແຜນປະຈຳປີ', 'Annual Plans', c.import_plans || 0, '📅'], ['ບໍລິສັດ', 'Companies', c.companies || 0, '🏢']];
         $('#stats').innerHTML = stats.map(x => `<div class="stat-card"><div class="stat-icon">${x[3]}</div><div><strong>${x[2]}</strong><span>${lang === 'lo' ? x[0] : x[1]}</span></div></div>`).join('');
-        $('#storage-mode').textContent = `${r.data.storageMode || ''} / ${r.data.authMode || ''}`;
-        const sl = $('#side-storage-label');
-        if (sl)
-            sl.textContent = r.data.storageMode === 'postgres' ? 'Neon PostgreSQL Staging' : 'Local Development Mode';
+        showStorageMode(r.data.storageMode);
     }
     catch (e) {
         console.error(e);
@@ -200,8 +204,10 @@ async function loadModule() {
     }
     showCustomPage(false);
     configureBulkToolbar();
-    if (current.key === 'animuse')
-        return loadAnimuse();
+    if (current.key === 'animuse') {
+        showCustomPage(true);
+        return renderAmuWorkspace({ root: $('#custom-page'), lang, api });
+    }
     $('#page-title').textContent = t(current);
     $('#page-subtitle').textContent = current.priority ? (lang === 'lo' ? 'Priority Veterinary Products • ຂໍ້ມູນຈາກ Neon PostgreSQL' : 'Priority Veterinary Products • Neon PostgreSQL') : (lang === 'lo' ? 'ຂໍ້ມູນຈາກ LVSP API' : 'Data from LVSP API');
     $('#table-body').innerHTML = `<tr><td colspan="${current.fields.length + 1}" class="empty">Loading…</td></tr>`;
@@ -392,8 +398,29 @@ async function loadPublicSettings() {
     }
     catch { }
 }
-function updateNetworkState() { const el = $('#network-state'); if (!el)
-    return; const on = navigator.onLine; el.textContent = on ? (lang === 'lo' ? 'Online' : 'Online') : (lang === 'lo' ? 'Offline' : 'Offline'); el.classList.toggle('online', on); el.classList.toggle('offline', !on); }
+function showStorageMode(mode) {
+    const label = mode === 'postgres' ? (lang === 'lo' ? 'ຖານຂໍ້ມູນກາງ' : 'Central database') : (lang === 'lo' ? 'ຂໍ້ມູນໃນເຄື່ອງ' : 'Local data');
+    $('#storage-mode').textContent = label;
+    $('#side-storage-label').textContent = label;
+}
+let connectionCheck = 0;
+async function updateNetworkState() {
+    const el = $('#network-state');
+    if (!el)
+        return;
+    const check = ++connectionCheck;
+    el.textContent = lang === 'lo' ? 'ກຳລັງກວດການເຊື່ອມຕໍ່…' : 'Checking connection…';
+    const result = await probeConnection(navigator.onLine);
+    if (check !== connectionCheck)
+        return;
+    const connected = result.state === 'connected';
+    el.textContent = connected ? (lang === 'lo' ? 'ເຊື່ອມຕໍ່ແລ້ວ' : 'Connected') : result.state === 'offline' ? (lang === 'lo' ? 'ອອບລາຍ' : 'Offline') : (lang === 'lo' ? 'ຕິດຕໍ່ລະບົບບໍ່ໄດ້' : 'Server unavailable');
+    el.classList.toggle('online', connected);
+    el.classList.toggle('offline', !connected);
+    $('#connection-retry')?.classList.toggle('hidden', connected);
+    if (connected && result.storage)
+        showStorageMode(result.storage);
+}
 function initPwa() {
     updateNetworkState();
     window.addEventListener('online', updateNetworkState);
@@ -1594,6 +1621,7 @@ async function initAuth() {
     }
 }
 function bind() {
+    $('#connection-retry')?.addEventListener('click', () => void updateNetworkState());
     $('#install-btn').addEventListener('click', () => installPwa());
     $('#update-btn').addEventListener('click', () => applyPwaUpdate());
     $('#create-btn').addEventListener('click', () => { editingDrugId = null; editingCompanyId = null; companySiteContext = null; companyRegistrationCompanyId = null; openCreate(); });
